@@ -86,6 +86,25 @@ const eslintConfig = [
                         'object',
                         'type',
                     ],
+                    pathGroups: [
+                        {
+                            pattern: 'react*',
+                            group: 'external',
+                            position: 'before',
+                        },
+                        {
+                            pattern: '@{components,utils,assets}/**/*',
+                            group: 'internal',
+                        },
+                        {
+                            pattern: '@constants/**/*',
+                            group: 'object',
+                        },
+                        {
+                            pattern: '@typings/**/*',
+                            group: 'type',
+                        },
+                    ],
                     'newlines-between': 'always',
                     alphabetize: {
                         order: 'asc',
