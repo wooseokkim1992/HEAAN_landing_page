@@ -64,74 +64,6 @@ const eslintConfig = [
       // jsx-a11y는 extends로 가져왔으므로 여기서는 명시적으로 추가할 필요 없음
       // 만약 extends 없이 개별 규칙을 사용한다면: "jsx-a11y": compat.plugins["jsx-a11y"]
     },
-<<<<<<< Updated upstream
-    // 6. **Module Import Order 및 Import Rule 설정**
-    {
-        files: ['./src/**/*.{js,jsx,ts,tsx}'],
-        ...compat.extends(
-            'plugin:import/recommended',
-            'plugin:import/typescript',
-        )[0],
-        rules: {
-            'import/order': [
-                'error',
-                {
-                    groups: [
-                        'builtin',
-                        'external',
-                        'internal', // 파일 별칭 경로 (ex. @/components)는 'internal'로 분류됩니다.
-                        'parent',
-                        'sibling',
-                        'index',
-                        'object',
-                        'type',
-                    ],
-                    pathGroups: [
-                        {
-                            pattern: 'react*',
-                            group: 'external',
-                            position: 'before',
-                        },
-                        {
-                            pattern: '@{components,utils,assets}/**/*',
-                            group: 'internal',
-                        },
-                        {
-                            pattern: '@constants/**/*',
-                            group: 'object',
-                        },
-                        {
-                            pattern: '@typings/**/*',
-                            group: 'type',
-                        },
-                    ],
-                    'newlines-between': 'always',
-                    alphabetize: {
-                        order: 'asc',
-                        caseInsensitive: true,
-                    },
-                },
-            ],
-            'import/no-unresolved': 'error', // 해결되지 않는 임포트 경로 오류
-            'import/no-duplicates': 'error', // 중복 임포트 방지
-        },
-        settings: {
-            'import/resolver': {
-                node: {
-                    extensions: ['.js', '.jsx', '.ts', '.tsx', '.d.ts'],
-                },
-                typescript: {
-                    project: './tsconfig.json', // tsconfig.json의 'paths' 설정을 읽어들여 파일 별칭 인식
-                },
-            },
-        },
-=======
-    settings: {
-      react: {
-        version: 'detect', // 설치된 React 버전 자동 감지
-      },
->>>>>>> Stashed changes
-    },
     languageOptions: {
       parserOptions: {
         ecmaFeatures: {
@@ -155,6 +87,65 @@ const eslintConfig = [
       'react/self-closing-comp': 'error', // '2' 대신 'error' 또는 'warn' 사용
     },
   },
+  // 6. **Module Import Order 및 Import Rule 설정**
+  {
+    files: ['./src/**/*.{js,jsx,ts,tsx}'],
+    ...compat.extends('plugin:import/recommended', 'plugin:import/typescript')[0],
+    rules: {
+      'import/order': [
+        'error',
+        {
+          groups: [
+            'builtin',
+            'external',
+            'internal', // 파일 별칭 경로 (ex. @/components)는 'internal'로 분류됩니다.
+            'parent',
+            'sibling',
+            'index',
+            'object',
+            'type',
+          ],
+          pathGroups: [
+            {
+              pattern: 'react*',
+              group: 'external',
+              position: 'before',
+            },
+            {
+              pattern: '@{components,utils,assets}/**/*',
+              group: 'internal',
+            },
+            {
+              pattern: '@constants/**/*',
+              group: 'object',
+            },
+            {
+              pattern: '@typings/**/*',
+              group: 'type',
+            },
+          ],
+          'newlines-between': 'always',
+          alphabetize: {
+            order: 'asc',
+            caseInsensitive: true,
+          },
+        },
+      ],
+      'import/no-unresolved': 'error', // 해결되지 않는 임포트 경로 오류
+      'import/no-duplicates': 'error', // 중복 임포트 방지
+    },
+    settings: {
+      'import/resolver': {
+        node: {
+          extensions: ['.js', '.jsx', '.ts', '.tsx', '.d.ts'],
+        },
+        typescript: {
+          project: './tsconfig.json', // tsconfig.json의 'paths' 설정을 읽어들여 파일 별칭 인식
+        },
+      },
+    },
+  },
+
   // 6. **Module Import Order 및 Import Rule 설정**
   {
     files: ['./src/**/*.{js,jsx,ts,tsx}'],
