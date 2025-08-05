@@ -7,27 +7,38 @@ function TempLogin() {
   const [password, setPassword] = useState<string>('');
 
   return (
-    <div className="flex flex-row gap-20px  w-full">
-      <input
-        type="text"
-        value={username}
-        onChange={(evt) => {
-          const {
-            target: { value },
-          } = evt;
-          setUsername(value);
-        }}
-      />
-      <input
-        type="password"
-        value={password}
-        onChange={(evt) => {
-          const {
-            target: { value },
-          } = evt;
-          setPassword(value);
-        }}
-      />
+    <div className="flex flex-row gap-[10px] w-fill bg-white">
+      <div className="flex flex-row gap-[2.5px] w-auto">
+        <label htmlFor="username">username</label>
+        <input
+          id="username"
+          name="username"
+          className="w-[120px] border-[1px] border-solid border-black "
+          type="text"
+          value={username}
+          onChange={(evt) => {
+            const {
+              target: { value },
+            } = evt;
+            setUsername(value);
+          }}
+        />
+      </div>
+      <div className="flex flex-row gap-[2.5px] w-auto">
+        <label htmlFor="username">username</label>
+        <input
+          className="w-[120px] border-[1px] border-solid border-black "
+          name="password"
+          type="password"
+          value={password}
+          onChange={(evt) => {
+            const {
+              target: { value },
+            } = evt;
+            setPassword(value);
+          }}
+        />
+      </div>
     </div>
   );
 }
