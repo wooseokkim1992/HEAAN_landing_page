@@ -5,26 +5,18 @@ const nextConfig: NextConfig = {
   allowedDevOrigins: ['localhost', '172.16.0.31'],
   reactStrictMode: true,
   output: 'standalone',
-  compiler: {
-    //removeConsole: process.env.NODE_ENV === 'development' ? {} : { exclude: ['error'] },
+  webpack: (config, {}) => {
+    config.module.rules.push({
+      test: /\.svg$/,
+      use: ['@svgr/webpack'],
+    });
+    return config;
   },
-  async rewrites() {
-    return [
-      {
-        source: '/api/callback',
-        destination: `/api/v2/users/oidc/callback`,
-      },
-      // {
-      //   source: '/auth/:path*',
-      //   destination: `${process.env.NEXT_PUBLIC_NGINX_URL}/interaction/:path*`,
-      // },
-    ];
+  images: {
+    formats: ['image/avif', 'image/webp'],
+    deviceSizes: [640, 960, 1200, 1920],
+    imageSizes: [16, 56, 96, 128],
   },
-  // experimental: {
-  //   serverActions: {
-  //     allowedOrigins: ['wooseok.iheaan.io'],
-  //   },
-  // },
 };
 
 export default nextConfig;
