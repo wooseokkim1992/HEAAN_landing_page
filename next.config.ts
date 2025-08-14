@@ -17,6 +17,9 @@ const nextConfig: NextConfig = {
     deviceSizes: [640, 960, 1200, 1920],
     imageSizes: [16, 56, 96, 128],
   },
+  eslint: {
+    ignoreDuringBuilds: true,
+  },
 };
 
 export default nextConfig;

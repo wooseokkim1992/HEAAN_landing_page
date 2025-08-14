@@ -1,12 +1,11 @@
-"use client";
+'use client';
 
-import { useEffect, useState } from "react";
-import { useRouter } from "next/navigation";
+import { useRouter } from 'next/navigation';
+import { useEffect, useState } from 'react';
 
-import Button from "@/components/elements/Button";
-import Input from "@/components/elements/Input";
-import { getSessionStorage } from "@/utilities/sessionStorage";
-import { handleSignUp } from "@/api/authAPI";
+import { handleSignUp } from '@/api/authAPI';
+import Button from '@/components/elements/Button';
+import Input from '@/components/elements/Input';
 import {
   BTN_TEXT,
   INPUT_LABELS,
@@ -16,27 +15,23 @@ import {
   SESSION_STORAGE_VAL,
   SUB_TEXT,
   SUCCESSED,
-} from "@/constants/commonConstants";
-import { INPUT_STATUS_VAR } from "@/constants/styleConstants";
-import { InputStatusType } from "@/types/styleTypes";
+} from '@/constants/commonConstants';
+import { INPUT_STATUS_VAR } from '@/constants/styleConstants';
+import { InputStatusType } from '@/types/styleTypes';
+import { getSessionStorage } from '@/utilities/sessionStorage';
 
 const SignUp = () => {
-  const [email, setEmail] = useState("");
-  const [emailStatus, setEmailStatus] = useState<InputStatusType>(
+  const [email, setEmail] = useState('');
+  const [emailStatus, setEmailStatus] = useState<InputStatusType>(INPUT_STATUS_VAR.default);
+  const [password, setPassword] = useState('');
+  const [passwordStatus, setPasswordStatus] = useState<InputStatusType>(INPUT_STATUS_VAR.default);
+  const [confirmPassword, setConfirmPassword] = useState('');
+  const [confirmPasswordStatus, setConfirmPasswordStatus] = useState<InputStatusType>(
     INPUT_STATUS_VAR.default,
   );
-  const [password, setPassword] = useState("");
-  const [passwordStatus, setPasswordStatus] = useState<InputStatusType>(
-    INPUT_STATUS_VAR.default,
-  );
-  const [confirmPassword, setConfirmPassword] = useState("");
-  const [confirmPasswordStatus, setConfirmPasswordStatus] =
-    useState<InputStatusType>(INPUT_STATUS_VAR.default);
-  const [name, setName] = useState("");
-  const [nameStatus, setNameStatus] = useState<InputStatusType>(
-    INPUT_STATUS_VAR.default,
-  );
-  const [occupation, setOccupation] = useState("");
+  const [name, setName] = useState('');
+  const [nameStatus, setNameStatus] = useState<InputStatusType>(INPUT_STATUS_VAR.default);
+  const [occupation, setOccupation] = useState('');
   const [occupationStatus, setOccupationStatus] = useState<InputStatusType>(
     INPUT_STATUS_VAR.default,
   );
@@ -46,9 +41,7 @@ const SignUp = () => {
   useEffect(() => {
     if (emailStatus === INPUT_STATUS_VAR.default && !!email) {
       setEmailStatus(() =>
-        REG_EXP.email.test(email)
-          ? INPUT_STATUS_VAR.default
-          : INPUT_STATUS_VAR.warning,
+        REG_EXP.email.test(email) ? INPUT_STATUS_VAR.default : INPUT_STATUS_VAR.warning,
       );
     }
   }, [email, emailStatus]);
@@ -56,9 +49,7 @@ const SignUp = () => {
   useEffect(() => {
     if (passwordStatus === INPUT_STATUS_VAR.default && !!password) {
       setPasswordStatus(() =>
-        REG_EXP.password.test(password)
-          ? INPUT_STATUS_VAR.default
-          : INPUT_STATUS_VAR.warning,
+        REG_EXP.password.test(password) ? INPUT_STATUS_VAR.default : INPUT_STATUS_VAR.warning,
       );
     }
   }, [password, passwordStatus]);
@@ -66,27 +57,21 @@ const SignUp = () => {
   useEffect(() => {
     if (!!confirmPassword) {
       setConfirmPasswordStatus(() =>
-        password === confirmPassword
-          ? INPUT_STATUS_VAR.default
-          : INPUT_STATUS_VAR.warning,
+        password === confirmPassword ? INPUT_STATUS_VAR.default : INPUT_STATUS_VAR.warning,
       );
     }
   }, [password, confirmPassword, confirmPasswordStatus]);
 
   const handleClick = async () => {
     const res = await handleSignUp({ email, password, name, occupation });
-    return (
-      res === SUCCESSED &&
-      router.push(`${PATH_LIST.confirmAccount}?email=${email}`)
-    );
+    return res === SUCCESSED && router.push(`${PATH_LIST.confirmAccount}?email=${email}`);
   };
 
   const isValid =
     REG_EXP.email.test(email) &&
     REG_EXP.password.test(password) &&
     password === confirmPassword &&
-    getSessionStorage(SESSION_STORAGE_VAL.required) ===
-      SESSION_STORAGE_VAL.true &&
+    getSessionStorage(SESSION_STORAGE_VAL.required) === SESSION_STORAGE_VAL.true &&
     !!name.trim().length &&
     !!occupation.trim().length;
 
@@ -97,23 +82,19 @@ const SignUp = () => {
         <Input
           id="sign-up-email"
           placeholder={PLACEHOLDERS.email}
-          showLabel={true}
+          showLabel
           labelText={INPUT_LABELS.email}
           value={email}
           setValue={setEmail}
           inputStatus={emailStatus}
           setInputStatus={setEmailStatus}
-          subText={
-            emailStatus === INPUT_STATUS_VAR.warning
-              ? SUB_TEXT.email.invalidInput
-              : ""
-          }
+          subText={emailStatus === INPUT_STATUS_VAR.warning ? SUB_TEXT.email.invalidInput : ''}
         />
         <Input
           id="sign-up-password"
           type="password"
           placeholder={PLACEHOLDERS.password}
-          showLabel={true}
+          showLabel
           labelText={INPUT_LABELS.password}
           value={password}
           setValue={setPassword}
@@ -129,7 +110,7 @@ const SignUp = () => {
           id="sign-up-confirm-password"
           type="password"
           placeholder={PLACEHOLDERS.confirmPassword}
-          showLabel={true}
+          showLabel
           labelText={INPUT_LABELS.confirmPassword}
           value={confirmPassword}
           setValue={setConfirmPassword}
@@ -144,7 +125,7 @@ const SignUp = () => {
         <Input
           id="sign-up-name"
           placeholder={PLACEHOLDERS.name}
-          showLabel={true}
+          showLabel
           labelText={INPUT_LABELS.name}
           value={name}
           setValue={setName}
@@ -154,7 +135,7 @@ const SignUp = () => {
         <Input
           id="sign-up-occupation"
           placeholder={PLACEHOLDERS.occupation}
-          showLabel={true}
+          showLabel
           labelText={INPUT_LABELS.occupation}
           value={occupation}
           setValue={setOccupation}
@@ -168,13 +149,13 @@ const SignUp = () => {
           btnText={BTN_TEXT.cancel}
           btnSize="lg"
           btnColor="blue03Outline"
-          isLink={true}
+          isLink
           targetLink={PATH_LIST.signIn}
         />
         <Button
           btnText={BTN_TEXT.next}
           btnSize="lg"
-          btnColor={isValid ? "blue01Filled" : "disabled"}
+          btnColor={isValid ? 'blue01Filled' : 'disabled'}
           disabled={!isValid}
           handleClick={handleClick}
         />

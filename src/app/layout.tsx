@@ -2,13 +2,12 @@ import type { Metadata } from 'next';
 
 import Image from 'next/image';
 
-import AmplifyConfiguration from '@/amplify/AmplifyConfiguration';
-
 import './globals.css';
 import AuthChecker from '@/components/AuthChecker';
 import Footer from '@/components/Footer';
 import Navigation from '@/components/Navigation';
 import QueryProvider from '@/state/tanstackQuery/QueryProvider';
+import AmplifyConfiguration from '@amplify/AmplifyConfiguration';
 
 export const metadata: Metadata = {
   metadataBase: new URL('https://heaan.io'),

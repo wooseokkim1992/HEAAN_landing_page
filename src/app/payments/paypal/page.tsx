@@ -1,4 +1,4 @@
-import Paypal from "@/app/payments/paypal/Paypal";
+import Paypal from '@/app/payments/paypal/Paypal';
 
 const page = () => {
   return <Paypal />;

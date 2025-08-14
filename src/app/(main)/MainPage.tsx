@@ -1,15 +1,15 @@
-import Image from "next/image";
+import Image from 'next/image';
 
-import CodeHeaanTitle from "@/assets/code_heaan_title.svg";
-import DoneOutline from "@/assets/done_outline.svg";
-import Globe from "@/assets/globe.svg";
-import Lock from "@/assets/lock.svg";
-import StartButton from "@/components/elements/StartButton";
+import CodeHeaanTitle from '@/assets/code_heaan_title.svg';
+import DoneOutline from '@/assets/done_outline.svg';
+import Globe from '@/assets/globe.svg';
+import Lock from '@/assets/lock.svg';
+import StartButton from '@/components/elements/StartButton';
 
 const PAY_FOR_GPU_USAGE = [
-  "Transparent per-minute GPU pricing",
-  "Prepaid credits or global payment gateways (Stripe, Toss, …)",
-  "Secure and compliant payment infrastructure",
+  'Transparent per-minute GPU pricing',
+  'Prepaid credits or global payment gateways (Stripe, Toss, …)',
+  'Secure and compliant payment infrastructure',
 ];
 
 const MainPage = () => {
@@ -29,15 +29,11 @@ const MainPage = () => {
           <h1 className="pt-20 sm:pt-36">
             <CodeHeaanTitle className="w-[80vw] fill-white sm:w-[368px]" />
           </h1>
-          <h3>
-            Code, Build, and Accelerate FHE Applications — Seamlessly in the
-            Cloud
-          </h3>
+          <h3>Code, Build, and Accelerate FHE Applications — Seamlessly in the Cloud</h3>
           <p className="text-base text-white md:text-lg">
-            CODE.HEAAN is your browser-based platform for coding, building, and
-            executing high performance Fully Homomorphic Encryption(FHE)
-            applications with GPU acceleration — no local setup, no hardware
-            dependency.
+            CODE.HEAAN is your browser-based platform for coding, building, and executing high
+            performance Fully Homomorphic Encryption(FHE) applications with GPU acceleration — no
+            local setup, no hardware dependency.
           </p>
           <StartButton />
           <Image
@@ -117,8 +113,7 @@ const MainPage = () => {
               <li className="flex h-full flex-col gap-4 rounded border-2 border-[#1C3A9A] p-4">
                 <Globe className="h-8 w-8 fill-[#30B3E0]" />
                 <span className="text-base">
-                  Stripe, PayPal, Alipay, WeChat Pay, and more for International
-                  Users
+                  Stripe, PayPal, Alipay, WeChat Pay, and more for International Users
                 </span>
               </li>
               <li className="flex h-full flex-col gap-4 rounded border-2 border-[#1C3A9A] p-4">

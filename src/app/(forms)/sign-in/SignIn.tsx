@@ -1,33 +1,29 @@
-"use client";
+'use client';
 
-import { useState } from "react";
-import { useRouter, useSearchParams } from "next/navigation";
+import { useRouter, useSearchParams } from 'next/navigation';
+import { useState } from 'react';
 
-import Button from "@/components/elements/Button";
-import Input from "@/components/elements/Input";
+import Button from '@/components/elements/Button';
+import Input from '@/components/elements/Input';
 import {
   BTN_TEXT,
   INPUT_LABELS,
   PATH_LIST,
   PLACEHOLDERS,
   ALERT_MSG,
-} from "@/constants/commonConstants";
-import { INPUT_STATUS_VAR } from "@/constants/styleConstants";
-import { InputStatusType } from "@/types/styleTypes";
+} from '@/constants/commonConstants';
+import { INPUT_STATUS_VAR } from '@/constants/styleConstants';
+import { InputStatusType } from '@/types/styleTypes';
 
 const SignIn = () => {
-  const [email, setEmail] = useState("");
-  const [emailStatus, setEmailStatus] = useState<InputStatusType>(
-    INPUT_STATUS_VAR.default,
-  );
-  const [password, setPassword] = useState("");
-  const [passwordStatus, setPasswordStatus] = useState<InputStatusType>(
-    INPUT_STATUS_VAR.default,
-  );
+  const [email, setEmail] = useState('');
+  const [emailStatus, setEmailStatus] = useState<InputStatusType>(INPUT_STATUS_VAR.default);
+  const [password, setPassword] = useState('');
+  const [passwordStatus, setPasswordStatus] = useState<InputStatusType>(INPUT_STATUS_VAR.default);
 
   const router = useRouter();
   const queryParams = useSearchParams();
-  const uid = queryParams.get("uid");
+  const uid = queryParams.get('uid');
 
   if (uid === null) {
     window.alert(ALERT_MSG.signIn.invalidAccess);
@@ -37,7 +33,7 @@ const SignIn = () => {
   const isValid = !!email && !!password;
 
   // FIXME: This feature will be removed.
-  const errorText = queryParams.get("error");
+  const errorText = queryParams.get('error');
 
   if (errorText !== null) {
     window.alert(errorText);
@@ -55,7 +51,7 @@ const SignIn = () => {
         <Input
           id="username"
           placeholder={PLACEHOLDERS.email}
-          showLabel={true}
+          showLabel
           labelText={INPUT_LABELS.email}
           value={email}
           setValue={setEmail}
@@ -66,7 +62,7 @@ const SignIn = () => {
           id="password"
           type="password"
           placeholder={PLACEHOLDERS.password}
-          showLabel={true}
+          showLabel
           labelText={INPUT_LABELS.password}
           value={password}
           setValue={setPassword}
@@ -78,7 +74,7 @@ const SignIn = () => {
             btnType="submit"
             btnText={BTN_TEXT.signIn}
             btnSize="lg"
-            btnColor={isValid ? "blue01Filled" : "disabled"}
+            btnColor={isValid ? 'blue01Filled' : 'disabled'}
             disabled={!isValid}
           />
         </div>
@@ -91,7 +87,7 @@ const SignIn = () => {
             btnText={BTN_TEXT.createAccount}
             btnSize="text"
             btnColor="blue03Text"
-            isLink={true}
+            isLink
             targetLink={PATH_LIST.termsAndConditions}
           />
         </div>
@@ -101,7 +97,7 @@ const SignIn = () => {
             btnText={BTN_TEXT.resetPassword}
             btnSize="text"
             btnColor="blue03Text"
-            isLink={true}
+            isLink
             targetLink={PATH_LIST.resetPassword}
           />
         </div>

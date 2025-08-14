@@ -1,9 +1,9 @@
-import { TermsType } from "@/types/commonTypes";
+import { TermsType } from '@/types/commonTypes';
 
 export const SOFTWARE_LICENSE_AGREEMENT: TermsType[] = [
   {
-    title: "Software License Agreement for CODE.HEAAN (Beta Version)",
-    updated: "2025-05-02",
+    title: 'Software License Agreement for CODE.HEAAN (Beta Version)',
+    updated: '2025-05-02',
     content: `
 **IMPORTANT - READ CAREFULLY**: This Software License Agreement ("Agreement") is a legal agreement between you (the "Licensee") and CryptoLab ("Licensor") for the use of CODE.HEAAN (the "Service"), including the HEaaN library (the "Library") or SDK (the “Software”) pre-installed within the instance allocated to the Licensee's workspace container.
 

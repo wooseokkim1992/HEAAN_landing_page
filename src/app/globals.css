@@ -1,15 +1,15 @@
-@import "tailwindcss";
+@import 'tailwindcss';
 
-@import "tailwindcss/theme.css" layer(theme);
-@import "tailwindcss/preflight.css" layer(base);
-@import "tailwindcss/utilities.css" layer(utilities);
+@import 'tailwindcss/theme.css' layer(theme);
+@import 'tailwindcss/preflight.css' layer(base);
+@import 'tailwindcss/utilities.css' layer(utilities);
 
 @font-face {
-  font-family: "Pretendard";
+  font-family: 'Pretendard';
   font-weight: 45 920;
   font-style: normal;
   font-display: swap;
-  src: url("/fonts/PretendardVariable.woff2") format("woff2-variations");
+  src: url('/fonts/PretendardVariable.woff2') format('woff2-variations');
 }
 
 @font-face {
@@ -17,7 +17,7 @@
   font-weight: 300;
   font-style: light;
   font-display: swap;
-  src: url("/fonts/Urbanist-Light.woff2") format("woff2");
+  src: url('/fonts/Urbanist-Light.woff2') format('woff2');
 }
 
 @font-face {
@@ -25,7 +25,7 @@
   font-weight: 45 920;
   font-style: normal;
   font-display: swap;
-  src: url("/fonts/FiraCode-VariableFont_wght.woff2") format("woff2");
+  src: url('/fonts/FiraCode-VariableFont_wght.woff2') format('woff2');
 }
 
 @theme {
@@ -51,8 +51,8 @@
   --color-white: #ffffff;
   --color-black: #000000;
 
-  --font-Urbanist: "Urbanist", "sans-serif";
-  --font-FiraCode: "FiraCode", "sans-serif";
+  --font-Urbanist: 'Urbanist', 'sans-serif';
+  --font-FiraCode: 'FiraCode', 'sans-serif';
 
   --blur-2xs: 2px;
 }
@@ -123,7 +123,7 @@
   }
 
   h3 {
-    font-family: "Urbanist" !important;
+    font-family: 'Urbanist' !important;
     color: var(--color-white);
     font-size: 36px;
     font-weight: 300;
@@ -201,7 +201,7 @@
 }
 
 * {
-  font-family: "Pretendard";
+  font-family: 'Pretendard';
   box-sizing: border-box;
 }
 
@@ -234,7 +234,8 @@ article {
     margin: 12px 0;
   }
 
-  th, td {
+  th,
+  td {
     border: 1px solid var(--color-bg03);
     padding: 4px 8px;
   }

@@ -36,6 +36,4 @@ export type TempOrderType = OrderField & UserIdField & CurrencyField;
 
 export type ConfirmOrderType = OrderField & PaymentKeyField;
 
-export type PaymentsCancelType = CancelReasonField &
-  CancelAmountField &
-  PaymentKeyField;
+export type PaymentsCancelType = CancelReasonField & CancelAmountField & PaymentKeyField;

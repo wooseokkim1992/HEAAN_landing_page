@@ -1,9 +1,9 @@
-import Link from "next/link";
+import Link from 'next/link';
 
-import { PATH_LIST } from "@/constants/commonConstants";
-import { BTN_COLOR_VAR, BTN_SIZE_VAR } from "@/constants/styleConstants";
-import { PathUrlType } from "@/types/commonTypes";
-import { BTNColorType, BTNSizeType } from "@/types/styleTypes";
+import { PATH_LIST } from '@/constants/commonConstants';
+import { BTN_COLOR_VAR, BTN_SIZE_VAR } from '@/constants/styleConstants';
+import { PathUrlType } from '@/types/commonTypes';
+import { BTNColorType, BTNSizeType } from '@/types/styleTypes';
 
 interface ButtonProps {
   btnText: string;
@@ -14,11 +14,11 @@ interface ButtonProps {
   loading?: boolean;
   isLink?: boolean;
   targetLink?: PathUrlType;
-  btnType?: "button" | "submit" | "reset" | undefined;
+  btnType?: 'button' | 'submit' | 'reset' | undefined;
 }
 
 const Button = ({
-  btnText = "",
+  btnText = '',
   btnSize,
   btnColor,
   handleClick = () => {},
@@ -26,7 +26,7 @@ const Button = ({
   loading = false,
   isLink = false,
   targetLink = PATH_LIST.main,
-  btnType = "button",
+  btnType = 'button',
 }: ButtonProps) => {
   return (
     <button
@@ -36,10 +36,7 @@ const Button = ({
       disabled={loading || disabled}
     >
       {isLink && !disabled ? (
-        <Link
-          className="flex h-full w-full items-center justify-center"
-          href={targetLink}
-        >
+        <Link className="flex h-full w-full items-center justify-center" href={targetLink}>
           {btnText}
         </Link>
       ) : (

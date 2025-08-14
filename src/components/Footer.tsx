@@ -1,13 +1,9 @@
-import Image from "next/image";
-import Link from "next/link";
+import Image from 'next/image';
+import Link from 'next/link';
 
-import LogoCodeHeaanDark from "@/assets/code_heaan_logo_dark.png";
-import LogoCodeHeaanLight from "@/assets/code_heaan_logo_light.png";
-import {
-  FOOTER_CONTENTS,
-  FOOTER_NAV_LIST,
-  PATH_LIST,
-} from "@/constants/commonConstants";
+import LogoCodeHeaanDark from '@/assets/code_heaan_logo_dark.png';
+import LogoCodeHeaanLight from '@/assets/code_heaan_logo_light.png';
+import { FOOTER_CONTENTS, FOOTER_NAV_LIST, PATH_LIST } from '@/constants/commonConstants';
 
 const Footer = () => {
   return (
@@ -32,9 +28,7 @@ const Footer = () => {
               className="hidden dark:block"
             />
           </Link>
-          <p className="text-text03 cursor-default">
-            {FOOTER_CONTENTS.copyright}
-          </p>
+          <p className="text-text03 cursor-default">{FOOTER_CONTENTS.copyright}</p>
         </div>
         <ul className="flex items-end gap-4">
           {FOOTER_NAV_LIST.map((val, i) => (
@@ -45,7 +39,7 @@ const Footer = () => {
             </li>
           ))}
           <li className="text-text03">
-            Contact Us.{" "}
+            Contact Us.{' '}
             <a
               href={`mailto:${FOOTER_CONTENTS.contacts}`}
               target="_blank"

@@ -1,4 +1,4 @@
-import TossWidget from "@/app/payments/toss/TossWidget";
+import TossWidget from '@/app/payments/toss/TossWidget';
 
 const page = () => {
   return <TossWidget />;

@@ -1,35 +1,31 @@
-"use client";
+'use client';
 
-import { useEffect, useState } from "react";
-import {
-  loadTossPayments,
-  TossPaymentsPayment,
-} from "@tosspayments/tosspayments-sdk";
+import { loadTossPayments, TossPaymentsPayment } from '@tosspayments/tosspayments-sdk';
+import { useEffect, useState } from 'react';
 
-import Button from "@/components/elements/Button";
-import { useAuthStore } from "@/state/store/authStore";
-import { postTempOrder } from "@/api/paymentsAPI";
-import { OrderField } from "@/types/paymentsTypes";
+import { postTempOrder } from '@/api/paymentsAPI';
+import Button from '@/components/elements/Button';
+import { useAuthStore } from '@/state/store/authStore';
+import { OrderField } from '@/types/paymentsTypes';
 
 const InternationalPayment = () => {
   const [orderInfo, setOrderInfo] = useState<OrderField>({
-    orderId: "",
-    amount: "1000",
+    orderId: '',
+    amount: '1000',
     credit: 1000,
   });
-  const [currency, setCurrency] = useState("KRW");
+  const [currency, setCurrency] = useState('KRW');
   const [payment, setPayment] = useState<TossPaymentsPayment | null>(null);
 
   const { auth } = useAuthStore();
 
-  const clientKey = "test_ck_D5GePWvyJnrK0W0k6q8gLzN97Eoq";
-  const customerKey = "ii4RLf9MM7iuClXBEwlgY";
+  const clientKey = 'test_ck_D5GePWvyJnrK0W0k6q8gLzN97Eoq';
+  const customerKey = 'ii4RLf9MM7iuClXBEwlgY';
 
   useEffect(() => {
-    async function fetchPayment() {
+    (async () => {
       try {
         const tossPayments = await loadTossPayments(clientKey);
-
         // 회원 결제
         // @docs https://docs.tosspayments.com/sdk/v2/js#tosspaymentspayment
         const payment = tossPayments.payment({
@@ -38,11 +34,9 @@ const InternationalPayment = () => {
 
         setPayment(payment);
       } catch (error) {
-        console.error("Error fetching payment:", error);
+        console.error('Error fetching payment:', error);
       }
-    }
-
-    fetchPayment();
+    })();
   }, [clientKey]);
 
   const testTemporaryOrder = async () => {
@@ -75,26 +69,26 @@ const InternationalPayment = () => {
       // 결제를 요청하기 전에 orderId, amount를 서버에 저장하세요.
       // 결제 과정에서 악의적으로 결제 금액이 바뀌는 것을 확인하는 용도입니다.
       if (!payment) {
-        throw new Error("Payment widgets are not initialized.");
+        throw new Error('Payment widgets are not initialized.');
       }
 
       await payment.requestPayment({
-        method: "CARD", // 카드 및 간편결제
+        method: 'CARD', // 카드 및 간편결제
         amount: {
           value: Number(orderInfo.amount), // 결제 금액
           currency: currency, // 통화 단위
         },
         orderId: orderUUID, // 고유 주문번호
-        orderName: "토스 티셔츠 외 2건",
-        successUrl: window.location.origin + "/widget/success",
-        failUrl: window.location.origin + "/fail",
+        orderName: '토스 티셔츠 외 2건',
+        successUrl: window.location.origin + '/widget/success',
+        failUrl: window.location.origin + '/fail',
         customerEmail: auth.username,
         customerName: auth.username,
-        customerMobilePhone: "01012341234",
+        customerMobilePhone: '01012341234',
         // 카드 결제에 필요한 정보
         card: {
           useEscrow: false,
-          flowMode: "DEFAULT", // 통합결제창 여는 옵션
+          flowMode: 'DEFAULT', // 통합결제창 여는 옵션
           useCardPoint: false,
           useAppCardOnly: false,
           useInternationalCardOnly: true, // 다국어 결제창
@@ -118,7 +112,7 @@ const InternationalPayment = () => {
               id="amount"
               className={`placeholder-text04 border-text03 text-text01 h-7 w-full border-b text-sm outline-none sm:text-base`}
               type="text"
-              placeholder={"amount"}
+              placeholder={'amount'}
               value={orderInfo.amount}
               onChange={(e) =>
                 setOrderInfo((prev) => ({
@@ -134,7 +128,7 @@ const InternationalPayment = () => {
               id="credit"
               className={`placeholder-text-04 border-text03 text-text01 h-7 w-full border-b text-sm outline-none sm:text-base`}
               type="number"
-              placeholder={"credit"}
+              placeholder={'credit'}
               value={orderInfo.credit}
               onChange={(e) =>
                 setOrderInfo((prev) => ({
@@ -150,7 +144,7 @@ const InternationalPayment = () => {
               id="currency"
               className={`placeholder-text-04 border-text03 text-text01 h-7 w-full border-b text-sm outline-none sm:text-base`}
               type="text"
-              placeholder={"currency"}
+              placeholder={'currency'}
               value={currency}
               onChange={(e) => setCurrency(e.target.value)}
             />
@@ -160,7 +154,7 @@ const InternationalPayment = () => {
 
       <div className="w-[400px]">
         <Button
-          btnText={"CREATE ORDER"}
+          btnText={'CREATE ORDER'}
           btnSize="lg"
           btnColor="blue01Filled"
           isLink={false}

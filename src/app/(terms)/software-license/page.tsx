@@ -1,4 +1,4 @@
-import SoftwareLicense from "@/app/(terms)/software-license/SoftwareLicense";
+import SoftwareLicense from '@/app/(terms)/software-license/SoftwareLicense';
 
 const Page = () => {
   return <SoftwareLicense />;

@@ -1,15 +1,15 @@
-"use client";
+'use client';
 
-import { useEffect, useState } from "react";
-import Image from "next/image";
-import Link from "next/link";
+import Image from 'next/image';
+import Link from 'next/link';
+import { useEffect, useState } from 'react';
 
-import Button from "@/components/elements/Button";
-import { BTN_TEXT, NAV_LIST, PATH_LIST } from "@/constants/commonConstants";
-import { useAuthStore } from "@/state/store/authStore";
-import { NavType } from "@/types/commonTypes";
-import LogoCodeHeaanLight from "@/assets/code_heaan_logo_light.png";
-import LogoCodeHeaanDark from "@/assets/code_heaan_logo_dark.png";
+import LogoCodeHeaanDark from '@/assets/code_heaan_logo_dark.png';
+import LogoCodeHeaanLight from '@/assets/code_heaan_logo_light.png';
+import Button from '@/components/elements/Button';
+import { BTN_TEXT, NAV_LIST, PATH_LIST } from '@/constants/commonConstants';
+import { useAuthStore } from '@/state/store/authStore';
+import { NavType } from '@/types/commonTypes';
 
 const Navigation = () => {
   const [navList, setNavList] = useState<NavType>(NAV_LIST);
@@ -57,7 +57,7 @@ const Navigation = () => {
                 key={`${val.title}-${i}`}
                 className={`text-text02 text-sm md:text-base`}
                 href={val.url}
-                target={val._blank ? "_blank" : "_self"}
+                target={val._blank ? '_blank' : '_self'}
               >
                 {val.title}
               </Link>
@@ -68,7 +68,7 @@ const Navigation = () => {
               btnText={BTN_TEXT.goToWorkspace}
               btnSize="md"
               btnColor="blue03Outline"
-              isLink={true}
+              isLink
               targetLink={PATH_LIST.signIn}
             />
           </div>

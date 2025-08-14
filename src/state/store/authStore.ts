@@ -1,4 +1,4 @@
-import { create } from "zustand";
+import { create } from 'zustand';
 
 type AuthStoreType = {
   isAuth: boolean;
@@ -17,9 +17,8 @@ export const useAuthStore = create<UseAuthStoreProps>()((set) => ({
     // username: "geuna0204@cryptolab.co.kr",
     // isLoading: false,
     isAuth: false,
-    username: "",
+    username: '',
     isLoading: true,
   },
-  setAuth: (target: AuthStoreType) =>
-    set((state) => ({ ...state, auth: target })),
+  setAuth: (target: AuthStoreType) => set((state) => ({ ...state, auth: target })),
 }));

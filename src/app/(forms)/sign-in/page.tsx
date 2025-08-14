@@ -1,6 +1,6 @@
-import { Suspense } from "react";
+import { Suspense } from 'react';
 
-import SignIn from "@/app/(forms)/sign-in/SignIn";
+import SignIn from '@/app/(forms)/sign-in/SignIn';
 
 const Page = () => {
   return (

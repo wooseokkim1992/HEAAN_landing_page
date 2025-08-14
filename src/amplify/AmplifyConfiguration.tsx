@@ -1,6 +1,6 @@
-"use client";
+'use client';
 
-import { Amplify, ResourcesConfig } from "aws-amplify";
+import { Amplify, ResourcesConfig } from 'aws-amplify';
 
 const amplifyConfiguration: ResourcesConfig = {
   Auth: {
@@ -10,7 +10,7 @@ const amplifyConfiguration: ResourcesConfig = {
       loginWith: {
         email: true,
       },
-      signUpVerificationMethod: "code",
+      signUpVerificationMethod: 'code',
       userAttributes: {
         email: {
           required: true,

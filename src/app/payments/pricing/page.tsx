@@ -1,4 +1,4 @@
-import Pricing from "@/app/payments/pricing/Pricing";
+import Pricing from '@/app/payments/pricing/Pricing';
 
 const Page = () => {
   return (

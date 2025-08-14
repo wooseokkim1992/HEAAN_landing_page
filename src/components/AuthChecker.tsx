@@ -1,13 +1,13 @@
-"use client";
+'use client';
 
-import { useEffect } from "react";
+import { useEffect } from 'react';
 
-import { useGrantIdQuery } from "@/hooks/queries/useGrantIdQuery";
-import { useTokensQuery } from "@/hooks/queries/useTokensQuery";
-import { useUserInfoQuery } from "@/hooks/queries/useUserInfoQuery";
-import { handleSignOut } from "@/api/authAPI";
-import { useAuthStore } from "@/state/store/authStore";
-import { ALERT_MSG } from "@/constants/commonConstants";
+import { handleSignOut } from '@/api/authAPI';
+import { ALERT_MSG } from '@/constants/commonConstants';
+import { useGrantIdQuery } from '@/hooks/queries/useGrantIdQuery';
+import { useTokensQuery } from '@/hooks/queries/useTokensQuery';
+import { useUserInfoQuery } from '@/hooks/queries/useUserInfoQuery';
+import { useAuthStore } from '@/state/store/authStore';
 
 const AuthChecker = () => {
   const {
@@ -30,11 +30,11 @@ const AuthChecker = () => {
 
   const { auth, setAuth } = useAuthStore();
 
-  console.log("useUserInfoQuery >> ", userInfoData, useUserInfoSuccessed);
-  console.log("useTokensQuery >> ", tokenData, useTokensSuccessed);
-  console.log("useGrantIdQuery >> ", grantIdData, useGrantIdSuccessed);
-  console.log("useAuthStore >> ", auth);
-  console.log("===== AuthChecker RENDER =====");
+  console.log('useUserInfoQuery >> ', userInfoData, useUserInfoSuccessed);
+  console.log('useTokensQuery >> ', tokenData, useTokensSuccessed);
+  console.log('useGrantIdQuery >> ', grantIdData, useGrantIdSuccessed);
+  console.log('useAuthStore >> ', auth);
+  console.log('===== AuthChecker RENDER =====');
 
   useEffect(() => {
     if (!auth.isAuth) userInfoQueryRefetch();
@@ -42,7 +42,7 @@ const AuthChecker = () => {
 
   useEffect(() => {
     if (useUserInfoSuccessed) {
-      console.log("CALL useUserInfoQuery");
+      console.log('CALL useUserInfoQuery');
       switch (userInfoData.status) {
         case 200:
           setAuth({
@@ -64,10 +64,10 @@ const AuthChecker = () => {
 
   useEffect(() => {
     if (useTokensSuccessed) {
-      console.log("CALL useTokensQuery");
+      console.log('CALL useTokensQuery');
       switch (tokenData.status) {
         case 200:
-          console.log("getTokensByGrantId SUCCESS");
+          console.log('getTokensByGrantId SUCCESS');
           userInfoQueryRefetch();
           break;
         case 401:
@@ -85,16 +85,16 @@ const AuthChecker = () => {
 
   useEffect(() => {
     if (useGrantIdSuccessed) {
-      console.log("CALL useGrantIdQuery");
+      console.log('CALL useGrantIdQuery');
       switch (grantIdData.status) {
         case 200:
-          console.log("getGrantId SUCCESS");
+          console.log('getGrantId SUCCESS');
           tokensQueryRefetch();
           break;
         case 401:
           setAuth({
             isAuth: false,
-            username: "",
+            username: '',
             isLoading: false,
           });
           if (grantIdData.data.isSessionExist) {

@@ -1,4 +1,4 @@
-import InternationalPayment from "@/app/payments/international/InternationalPayment";
+import InternationalPayment from '@/app/payments/international/InternationalPayment';
 
 const page = () => {
   return <InternationalPayment />;

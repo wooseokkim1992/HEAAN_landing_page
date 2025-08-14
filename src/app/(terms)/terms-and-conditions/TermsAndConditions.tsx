@@ -1,21 +1,16 @@
-"use client";
+'use client';
 
-import { useRouter } from "next/navigation";
-import { useState } from "react";
+import { useRouter } from 'next/navigation';
+import { useState } from 'react';
 
-import Button from "@/components/elements/Button";
-import Checkbox from "@/components/elements/Checkbox";
-import TextContainer from "@/components/elements/TextContainer";
-import {
-  BTN_TEXT,
-  PATH_LIST,
-  SESSION_STORAGE_VAL,
-  TERMS_TEXT,
-} from "@/constants/commonConstants";
-import { PRIVACY_POLICY } from "@/data/privacyPolicy";
-import { SOFTWARE_LICENSE_AGREEMENT } from "@/data/softwareLicenseAgreement";
-import { TERMS_OF_SERVICE } from "@/data/termsOfService";
-import { setSessionStorage } from "@/utilities/sessionStorage";
+import Button from '@/components/elements/Button';
+import Checkbox from '@/components/elements/Checkbox';
+import TextContainer from '@/components/elements/TextContainer';
+import { BTN_TEXT, PATH_LIST, SESSION_STORAGE_VAL, TERMS_TEXT } from '@/constants/commonConstants';
+import { PRIVACY_POLICY } from '@/data/privacyPolicy';
+import { SOFTWARE_LICENSE_AGREEMENT } from '@/data/softwareLicenseAgreement';
+import { TERMS_OF_SERVICE } from '@/data/termsOfService';
+import { setSessionStorage } from '@/utilities/sessionStorage';
 
 const TermsAndConditions = () => {
   const [checked, setChecked] = useState({
@@ -66,11 +61,7 @@ const TermsAndConditions = () => {
       <div className="flex flex-col gap-6 md:gap-8">
         <Checkbox
           checkboxText={TERMS_TEXT.agreeToAll}
-          checked={
-            checked.termsOfService &&
-            checked.privacyPolicy &&
-            checked.softwareLicense
-          }
+          checked={checked.termsOfService && checked.privacyPolicy && checked.softwareLicense}
           handleChecked={handleAgreeToAll}
         />
         <div className="flex flex-col gap-4">
@@ -84,10 +75,7 @@ const TermsAndConditions = () => {
               }))
             }
           />
-          <TextContainer
-            title={TERMS_OF_SERVICE[0].title}
-            content={TERMS_OF_SERVICE[0].content}
-          />
+          <TextContainer title={TERMS_OF_SERVICE[0].title} content={TERMS_OF_SERVICE[0].content} />
         </div>
         <div className="flex flex-col gap-4">
           <Checkbox
@@ -100,10 +88,7 @@ const TermsAndConditions = () => {
               }))
             }
           />
-          <TextContainer
-            title={PRIVACY_POLICY[0].title}
-            content={PRIVACY_POLICY[0].content}
-          />
+          <TextContainer title={PRIVACY_POLICY[0].title} content={PRIVACY_POLICY[0].content} />
         </div>
         <div className="flex flex-col gap-4">
           <Checkbox
@@ -141,7 +126,7 @@ const TermsAndConditions = () => {
                 betaService: !prev.betaService,
               }))
             }
-            isEmphasized={true}
+            isEmphasized
           />
         </div>
       </div>
@@ -150,13 +135,13 @@ const TermsAndConditions = () => {
           btnText={BTN_TEXT.cancel}
           btnSize="lg"
           btnColor="blue03Outline"
-          isLink={true}
+          isLink
           targetLink={PATH_LIST.signIn}
         />
         <Button
           btnText={BTN_TEXT.next}
           btnSize="lg"
-          btnColor={isValid ? "blue01Filled" : "disabled"}
+          btnColor={isValid ? 'blue01Filled' : 'disabled'}
           handleClick={handleNext}
           disabled={!isValid}
         />

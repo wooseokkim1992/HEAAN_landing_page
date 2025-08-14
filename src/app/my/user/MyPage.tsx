@@ -1,25 +1,20 @@
-"use client";
+'use client';
 
-import { useEffect, useState } from "react";
-import { useRouter } from "next/navigation";
+import { useRouter } from 'next/navigation';
+import { useEffect, useState } from 'react';
 
-import Button from "@/components/elements/Button";
-import LoadingSpinner from "@/components/elements/LoadingSpinner";
-import { useAuthStore } from "@/state/store/authStore";
-import { handleSignOut } from "@/api/authAPI";
+import { handleSignOut } from '@/api/authAPI';
 import {
   getCreditChargeList,
   getCreditDeductList,
   getCreditRefundList,
   getUserCreditInfo,
-} from "@/api/creditAPI";
-import {
-  getCancelList,
-  getCancelOrder,
-  getOrderList,
-  postCancelOrder,
-} from "@/api/paymentsAPI";
-import { ALERT_MSG, BTN_TEXT, PATH_LIST } from "@/constants/commonConstants";
+} from '@/api/creditAPI';
+import { getCancelList, getCancelOrder, getOrderList, postCancelOrder } from '@/api/paymentsAPI';
+import Button from '@/components/elements/Button';
+import LoadingSpinner from '@/components/elements/LoadingSpinner';
+import { ALERT_MSG, BTN_TEXT, PATH_LIST } from '@/constants/commonConstants';
+import { useAuthStore } from '@/state/store/authStore';
 
 // TODO:DELETE
 // const ORDER_SAMPLE = [
@@ -82,15 +77,15 @@ type CancelListItemType = {
 };
 
 const MyPage = () => {
-  const [paymentKey, setPaymentKey] = useState("");
-  const [transactionKey, setTransactionKey] = useState("");
+  const [paymentKey, setPaymentKey] = useState('');
+  const [transactionKey, setTransactionKey] = useState('');
   const [orderList, setOrderList] = useState<OrderListItemType[]>([]);
   const [cancelList, setCancelList] = useState<CancelListItemType[]>([]);
-  const [cancelListItem, setCancelListItem] = useState("");
+  const [cancelListItem, setCancelListItem] = useState('');
 
   const [cancelOrder, setCancelOrder] = useState({
-    cancelReason: "",
-    cancelAmount: "",
+    cancelReason: '',
+    cancelAmount: '',
   });
 
   const router = useRouter();
@@ -100,10 +95,9 @@ const MyPage = () => {
 
   useEffect(() => {
     if (!auth.isLoading && !auth.isAuth) {
-      if (window.confirm(ALERT_MSG.auth.permissionDenied))
-        router.replace(PATH_LIST.main);
+      if (window.confirm(ALERT_MSG.auth.permissionDenied)) router.replace(PATH_LIST.main);
     }
-  }, [auth.isLoading, auth.isAuth]);
+  }, [auth.isLoading, auth.isAuth, router]);
 
   const onSignOut = () => {
     handleSignOut();
@@ -125,10 +119,10 @@ const MyPage = () => {
 
   const testGetOrder = async () => {
     try {
-      const res = await getOrderList({ page: "1" });
+      const res = await getOrderList({ page: '1' });
 
       if (res.status === 200) {
-        console.log("getOrderList", res.data);
+        console.log('getOrderList', res.data);
         const resArr = (res.data as OrderListItemType[]).map((val) => ({
           approvedAt: val.approvedAt,
           balanceAmount: val.balanceAmount,
@@ -164,7 +158,7 @@ const MyPage = () => {
       const res = await getCancelList();
 
       if (res.status === 200) {
-        console.log("getCancelList", res.data);
+        console.log('getCancelList', res.data);
 
         const resArr = (res.data as CancelListItemType[]).map((val) => ({
           canceledAt: val.canceledAt,
@@ -188,7 +182,7 @@ const MyPage = () => {
       const res = await getCancelOrder(transactionKey);
 
       if (res.status === 200) {
-        console.log("getCancelOrder", res.data);
+        console.log('getCancelOrder', res.data);
         const str = JSON.stringify(res.data);
         setCancelListItem(str);
       }
@@ -202,7 +196,7 @@ const MyPage = () => {
       const res = await getCreditChargeList();
 
       if (res.status === 200) {
-        console.log("getCreditChargeList", res.data);
+        console.log('getCreditChargeList', res.data);
       }
     } catch (err) {
       console.error(err);
@@ -213,7 +207,7 @@ const MyPage = () => {
     try {
       const res = await getCreditDeductList();
       if (res.status === 200) {
-        console.log("getCreditDeductList", res.data);
+        console.log('getCreditDeductList', res.data);
       }
     } catch (err) {
       console.error(err);
@@ -224,7 +218,7 @@ const MyPage = () => {
     try {
       const res = await getCreditRefundList();
       if (res.status === 200) {
-        console.log("getCreditRefundList", res.data);
+        console.log('getCreditRefundList', res.data);
       }
     } catch (err) {
       console.error(err);
@@ -241,7 +235,7 @@ const MyPage = () => {
               btnText={BTN_TEXT.pricing}
               btnSize="md"
               btnColor="blue01Filled"
-              isLink={true}
+              isLink
               targetLink={PATH_LIST.pricing}
             />
           </div>
@@ -259,7 +253,7 @@ const MyPage = () => {
         <div className="border-blue03 flex w-full flex-col gap-8 rounded border p-8">
           <div className="w-fit">
             <Button
-              btnText={"GET ORDER LIST"}
+              btnText={'GET ORDER LIST'}
               btnSize="md"
               btnColor="blue01Filled"
               isLink={false}
@@ -282,13 +276,11 @@ const MyPage = () => {
                     <span>paymentKey: {val.paymentKey}</span>
                     <div className="w-fit">
                       <Button
-                        btnText={"SELECT"}
+                        btnText={'SELECT'}
                         btnSize="md"
                         btnColor="blue03Outline"
                         isLink={false}
-                        handleClick={() =>
-                          handleSelectPaymentKey(val.paymentKey)
-                        }
+                        handleClick={() => handleSelectPaymentKey(val.paymentKey)}
                       />
                     </div>
                   </div>
@@ -308,7 +300,7 @@ const MyPage = () => {
               id="cancelReason"
               className={`placeholder-text-04 border-text03 text-text01 h-7 w-full border-b text-sm outline-none sm:text-base`}
               type="text"
-              placeholder={"cancelReason"}
+              placeholder={'cancelReason'}
               value={cancelOrder.cancelReason}
               onChange={(e) =>
                 setCancelOrder((prev) => ({
@@ -321,7 +313,7 @@ const MyPage = () => {
               id="cancelAmount"
               className={`placeholder-text-04 border-text03 text-text01 h-7 w-full border-b text-sm outline-none sm:text-base`}
               type="text"
-              placeholder={"cancelAmount"}
+              placeholder={'cancelAmount'}
               value={cancelOrder.cancelAmount}
               onChange={(e) =>
                 setCancelOrder((prev) => ({
@@ -332,7 +324,7 @@ const MyPage = () => {
             />
             <div className="w-fit">
               <Button
-                btnText={"CANCEL ORDER"}
+                btnText={'CANCEL ORDER'}
                 btnSize="md"
                 btnColor="blue01Filled"
                 isLink={false}
@@ -344,7 +336,7 @@ const MyPage = () => {
           <div className="border-blue03 flex w-full flex-col gap-8 rounded border p-8">
             <div className="w-fit">
               <Button
-                btnText={"GET CANCEL LIST"}
+                btnText={'GET CANCEL LIST'}
                 btnSize="md"
                 btnColor="blue01Filled"
                 isLink={false}
@@ -368,13 +360,11 @@ const MyPage = () => {
                       <span>transactionKey: {val.transactionKey}</span>
                       <div className="w-fit">
                         <Button
-                          btnText={"SELECT"}
+                          btnText={'SELECT'}
                           btnSize="md"
                           btnColor="blue03Outline"
                           isLink={false}
-                          handleClick={() =>
-                            setTransactionKey(val.transactionKey)
-                          }
+                          handleClick={() => setTransactionKey(val.transactionKey)}
                         />
                       </div>
                     </div>
@@ -390,16 +380,14 @@ const MyPage = () => {
             </p>
             <div className="w-fit">
               <Button
-                btnText={"GET CANCEL ORDER"}
+                btnText={'GET CANCEL ORDER'}
                 btnSize="md"
                 btnColor="blue01Filled"
                 isLink={false}
                 handleClick={testGetCancelOrder}
               />
             </div>
-            <p className="text-text01 w-full text-sm sm:text-base">
-              {cancelListItem}
-            </p>
+            <p className="text-text01 w-full text-sm sm:text-base">{cancelListItem}</p>
           </div>
         </div>
 
@@ -412,21 +400,19 @@ const MyPage = () => {
           </p>
           <div className="w-fit">
             <Button
-              btnText={"GET USER CREDIT INFO"}
+              btnText={'GET USER CREDIT INFO'}
               btnSize="md"
               btnColor="blue01Filled"
               isLink={false}
               handleClick={testCredits}
             />
           </div>
-          <p className="text-text01 w-full text-sm sm:text-base">
-            {cancelListItem}
-          </p>
+          <p className="text-text01 w-full text-sm sm:text-base">{cancelListItem}</p>
         </div>
         <div className="border-blue03 flex w-full flex-col gap-8 rounded border p-8">
           <div className="w-fit">
             <Button
-              btnText={"GET CREDIT CHARGE LIST"}
+              btnText={'GET CREDIT CHARGE LIST'}
               btnSize="md"
               btnColor="blue01Filled"
               isLink={false}
@@ -435,7 +421,7 @@ const MyPage = () => {
           </div>
           <div className="w-fit">
             <Button
-              btnText={"GET CREDIT DEDUCT LIST"}
+              btnText={'GET CREDIT DEDUCT LIST'}
               btnSize="md"
               btnColor="blue01Filled"
               isLink={false}
@@ -444,7 +430,7 @@ const MyPage = () => {
           </div>
           <div className="w-fit">
             <Button
-              btnText={"GET CREDIT REFUND LIST"}
+              btnText={'GET CREDIT REFUND LIST'}
               btnSize="md"
               btnColor="blue01Filled"
               isLink={false}

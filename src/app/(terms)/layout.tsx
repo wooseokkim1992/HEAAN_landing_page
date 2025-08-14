@@ -1,5 +1,5 @@
-import TermsContainer from "@/components/layout/TermsContainer";
-import { LayoutProps } from "@/types/commonTypes";
+import TermsContainer from '@/components/layout/TermsContainer';
+import { LayoutProps } from '@/types/commonTypes';
 
 const TermsLayout = ({ children }: LayoutProps) => {
   return (

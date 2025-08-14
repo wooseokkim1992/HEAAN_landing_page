@@ -1,4 +1,4 @@
-import { PATH_LIST } from "@/constants/commonConstants";
+import { PATH_LIST } from '@/constants/commonConstants';
 
 export interface LayoutProps {
   children: React.ReactNode;

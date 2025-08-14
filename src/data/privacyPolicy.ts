@@ -1,9 +1,9 @@
-import { TermsType } from "@/types/commonTypes";
+import { TermsType } from '@/types/commonTypes';
 
 export const PRIVACY_POLICY: TermsType[] = [
   {
-    title: "CODE.HEAAN Privacy Policy (BETA Version)",
-    updated: "2025-05-02",
+    title: 'CODE.HEAAN Privacy Policy (BETA Version)',
+    updated: '2025-05-02',
     content: `
 To safeguard the privacy and rights of data subjects, Cryptolab Inc. (“the Company”) responsibly processes and securely manages personal information in accordance with the Personal Information Protection Act (“PIPA”) and applicable laws and regulations. In line with Article 30 of the PIPA, we have established and disclosed this privacy policy to inform data subjects about our procedures and standards for processing and protecting personal information, as well as to ensure the efficient handling of related complaints.
 

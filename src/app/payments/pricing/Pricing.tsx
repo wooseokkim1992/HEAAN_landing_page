@@ -1,34 +1,30 @@
-"use client";
+'use client';
 
-import { useEffect, useState } from "react";
-import {
-  loadTossPayments,
-  ANONYMOUS,
-  TossPaymentsWidgets,
-} from "@tosspayments/tosspayments-sdk";
+import { loadTossPayments, ANONYMOUS, TossPaymentsWidgets } from '@tosspayments/tosspayments-sdk';
+import { useEffect, useState } from 'react';
 
-import Button from "@/components/elements/Button";
-import { useAuthStore } from "@/state/store/authStore";
-import { postTempOrder } from "@/api/paymentsAPI";
-import { BTN_TEXT, PATH_LIST } from "@/constants/commonConstants";
-import { OrderField } from "@/types/paymentsTypes";
+import { postTempOrder } from '@/api/paymentsAPI';
+import Button from '@/components/elements/Button';
+import { BTN_TEXT, PATH_LIST } from '@/constants/commonConstants';
+import { useAuthStore } from '@/state/store/authStore';
+import { OrderField } from '@/types/paymentsTypes';
 
 const Pricing = () => {
   const [orderInfo, setOrderInfo] = useState<OrderField>({
-    orderId: "",
-    amount: "1000",
+    orderId: '',
+    amount: '1000',
     credit: 1000,
   });
-  const [currency, setCurrency] = useState("KRW");
+  const [currency, setCurrency] = useState('KRW');
 
   const [ready, setReady] = useState(false);
   const [widgets, setWidgets] = useState<null | TossPaymentsWidgets>(null);
 
   const { auth } = useAuthStore();
 
-  const clientKey = process.env.NEXT_PUBLIC_TOSS_PAYMENTS_CLIENT_KEY ?? "";
+  const clientKey = process.env.NEXT_PUBLIC_TOSS_PAYMENTS_CLIENT_KEY ?? '';
 
-  console.log("TOSS ready? ", ready);
+  console.log('TOSS ready? ', ready);
 
   useEffect(() => {
     async function fetchPaymentWidgets() {
@@ -44,7 +40,7 @@ const Pricing = () => {
         // const widgets = tossPayments.widgets({ customerKey: ANONYMOUS });
         setWidgets(widgets);
       } catch (error) {
-        console.error("Error fetching payment widget:", error);
+        console.error('Error fetching payment widget:', error);
       }
     }
 
@@ -70,17 +66,17 @@ const Pricing = () => {
         // ------  결제 UI 렌더링 ------
         // @docs https://docs.tosspayments.com/sdk/v2/js#widgetsrenderpaymentmethods
         widgets.renderPaymentMethods({
-          selector: "#payment-method",
+          selector: '#payment-method',
           // 렌더링하고 싶은 결제 UI의 variantKey
           // 결제 수단 및 스타일이 다른 멀티 UI를 직접 만들고 싶다면 계약이 필요해요.
           // @docs https://docs.tosspayments.com/guides/v2/payment-widget/admin#새로운-결제-ui-추가하기
-          variantKey: "DEFAULT",
+          variantKey: 'DEFAULT',
         }),
         // ------  이용약관 UI 렌더링 ------
         // @docs https://docs.tosspayments.com/sdk/v2/js#widgetsrenderagreement
         widgets.renderAgreement({
-          selector: "#agreement",
-          variantKey: "AGREEMENT",
+          selector: '#agreement',
+          variantKey: 'AGREEMENT',
         }),
       ]);
 
@@ -119,15 +115,15 @@ const Pricing = () => {
       // 결제를 요청하기 전에 orderId, amount를 서버에 저장하세요.
       // 결제 과정에서 악의적으로 결제 금액이 바뀌는 것을 확인하는 용도입니다.
       if (!widgets) {
-        throw new Error("Payment widgets are not initialized.");
+        throw new Error('Payment widgets are not initialized.');
       }
 
       await widgets.requestPayment({
         orderId: orderUUID, // 고유 주문 번호
         // orderId: orderInfo.orderId, // 고유 주문 번호
-        orderName: "CODE.HEAAN order test",
-        successUrl: window.location.origin + "/widget/success", // 결제 요청이 성공하면 리다이렉트되는 URL
-        failUrl: window.location.origin + "/fail", // 결제 요청이 실패하면 리다이렉트되는 URL
+        orderName: 'CODE.HEAAN order test',
+        successUrl: window.location.origin + '/widget/success', // 결제 요청이 성공하면 리다이렉트되는 URL
+        failUrl: window.location.origin + '/fail', // 결제 요청이 실패하면 리다이렉트되는 URL
         customerEmail: auth.username,
         customerName: auth.username,
         // 가상계좌 안내, 퀵계좌이체 휴대폰 번호 자동 완성에 사용되는 값입니다. 필요하다면 주석을 해제해 주세요.
@@ -147,7 +143,7 @@ const Pricing = () => {
           btnText={BTN_TEXT.paypalWidget}
           btnSize="lg"
           btnColor="blue01Filled"
-          isLink={true}
+          isLink
           targetLink={PATH_LIST.paypalWidget}
         />
       </div>
@@ -156,7 +152,7 @@ const Pricing = () => {
           btnText={BTN_TEXT.internationalPaymentWidget}
           btnSize="lg"
           btnColor="blue01Filled"
-          isLink={true}
+          isLink
           targetLink={PATH_LIST.internationalPaymentWidget}
         />
       </div>
@@ -169,7 +165,7 @@ const Pricing = () => {
               id="amount"
               className={`placeholder-text04 border-text03 text-text01 h-7 w-full border-b text-sm outline-none sm:text-base`}
               type="text"
-              placeholder={"amount"}
+              placeholder={'amount'}
               value={orderInfo.amount}
               onChange={(e) =>
                 setOrderInfo((prev) => ({
@@ -185,7 +181,7 @@ const Pricing = () => {
               id="credit"
               className={`placeholder-text-04 border-text03 text-text01 h-7 w-full border-b text-sm outline-none sm:text-base`}
               type="number"
-              placeholder={"credit"}
+              placeholder={'credit'}
               value={orderInfo.credit}
               onChange={(e) =>
                 setOrderInfo((prev) => ({
@@ -201,7 +197,7 @@ const Pricing = () => {
               id="currency"
               className={`placeholder-text-04 border-text03 text-text01 h-7 w-full border-b text-sm outline-none sm:text-base`}
               type="text"
-              placeholder={"currency"}
+              placeholder={'currency'}
               value={currency}
               onChange={(e) => setCurrency(e.target.value)}
             />
@@ -216,7 +212,7 @@ const Pricing = () => {
       </div>
       <div className="w-[400px]">
         <Button
-          btnText={"CREATE ORDER"}
+          btnText={'CREATE ORDER'}
           btnSize="lg"
           btnColor="blue01Filled"
           isLink={false}

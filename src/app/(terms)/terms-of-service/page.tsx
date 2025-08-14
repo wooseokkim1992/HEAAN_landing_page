@@ -1,4 +1,4 @@
-import TermsOfService from "@/app/(terms)/terms-of-service/TermsOfService";
+import TermsOfService from '@/app/(terms)/terms-of-service/TermsOfService';
 
 const Page = () => {
   return <TermsOfService />;

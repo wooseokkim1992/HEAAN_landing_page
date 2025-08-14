@@ -1,6 +1,6 @@
-import { Suspense } from "react";
+import { Suspense } from 'react';
 
-import ConfirmAccount from "@/app/(forms)/confirm-account/ConfirmAccount";
+import ConfirmAccount from '@/app/(forms)/confirm-account/ConfirmAccount';
 
 const page = () => {
   return (

@@ -38,16 +38,16 @@ const eslintConfig = [
       parser: tsParser,
       parserOptions: {
         project: './tsconfig.json',
+        tsconfigRootDir: __dirname,
       },
     },
     rules: {
       'no-var': 'error', // 'var' 키워드 사용 금지
       semi: 'error', // 세미콜론 강제 (Prettier와 충돌할 수 있으므로 Prettier 사용 시 주의)
       // 'no-unused-vars'는 TypeScript 섹션에서 @typescript-eslint 버전으로 대체합니다.
-      'no-unused-vars': 'off',
-      '@typescript-eslint/no-floating-promises': 'error', // Promise를 처리하지 않을 때 경고
       '@typescript-eslint/explicit-module-boundary-types': 'off', // 모듈 경계 타입 명시 강제 해제 (개인의 선호에 따라)
-      '@typescript-eslint/no-unused-vars': 'error', // 사용되지 않는 변수 경고
+      '@typescript-eslint/no-unused-vars': ['error', { argsIgnorePattern: '^_' }],
+      'no-unused-vars': 'off',
     },
   },
 
@@ -55,8 +55,6 @@ const eslintConfig = [
   // React 관련 규칙과 접근성 규칙을 적용합니다.
   {
     files: ['src/**/*.{js,jsx,ts,tsx}'],
-    // 'plugin:react/recommended'와 'plugin:jsx-a11y/recommended' 확장
-    // 🚨 'recommanded' -> 'recommended' 오타 수정
     ...compat.extends('plugin:react/recommended', 'plugin:jsx-a11y/recommended')[0],
     plugins: {
       // compat.plugins를 사용하는 것이 일반적이며, reactPlugin을 직접 import한 경우에도 괜찮습니다.
@@ -107,7 +105,17 @@ const eslintConfig = [
           ],
           pathGroups: [
             {
+              pattern: 'next*',
+              group: 'external',
+              position: 'before',
+            },
+            {
               pattern: 'react*',
+              group: 'external',
+              position: 'before',
+            },
+            {
+              pattern: '@amplify',
               group: 'external',
               position: 'before',
             },
@@ -116,7 +124,7 @@ const eslintConfig = [
               group: 'internal',
             },
             {
-              pattern: '@{constants,amplify}/**/*',
+              pattern: '@{constants}/**/*',
               group: 'object',
             },
             {
@@ -166,7 +174,17 @@ const eslintConfig = [
           ],
           pathGroups: [
             {
+              pattern: 'next*',
+              group: 'external',
+              position: 'before',
+            },
+            {
               pattern: 'react*',
+              group: 'external',
+              position: 'before',
+            },
+            {
+              pattern: '@amplify',
               group: 'external',
               position: 'before',
             },

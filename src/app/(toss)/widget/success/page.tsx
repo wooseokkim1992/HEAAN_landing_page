@@ -1,6 +1,6 @@
-import { Suspense } from "react";
+import { Suspense } from 'react';
 
-import PaymentsSuccess from "@/app/(toss)/widget/success/PaymentsSuccess";
+import PaymentsSuccess from '@/app/(toss)/widget/success/PaymentsSuccess';
 
 const page = () => {
   return (

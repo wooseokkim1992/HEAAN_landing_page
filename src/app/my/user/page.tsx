@@ -1,4 +1,4 @@
-import MyPage from "@/app/my/user/MyPage";
+import MyPage from '@/app/my/user/MyPage';
 
 const Page = () => {
   return <MyPage />;

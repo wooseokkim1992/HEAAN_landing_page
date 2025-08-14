@@ -1,9 +1,9 @@
-import { TermsType } from "@/types/commonTypes";
+import { TermsType } from '@/types/commonTypes';
 
 export const TERMS_OF_SERVICE: TermsType[] = [
   {
-    title: "CODE.HEAAN Terms of Service (BETA Version)",
-    updated: "2025-05-02",
+    title: 'CODE.HEAAN Terms of Service (BETA Version)',
+    updated: '2025-05-02',
     content: `
 The provider of the internet services and other products supplied or provided available at https://heaan.io (the **"Website"** and together with the internet services and other products, the **"Service"** or **“CODE.HEAAN”**) is Cryptolab Inc., duly existing under the laws of the Republic of Korea having its registered office at Complex 27, Gwanak-ro 1, Gwanak-gu, Seoul, Korea (**"Cryptolab"** or **"we/our"**).
 
