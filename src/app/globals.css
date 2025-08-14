@@ -1,26 +1,250 @@
-@import 'tailwindcss';
+@import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
+@import "tailwindcss/theme.css" layer(theme);
+@import "tailwindcss/preflight.css" layer(base);
+@import "tailwindcss/utilities.css" layer(utilities);
+
+@font-face {
+  font-family: "Pretendard";
+  font-weight: 45 920;
+  font-style: normal;
+  font-display: swap;
+  src: url("/fonts/PretendardVariable.woff2") format("woff2-variations");
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+@font-face {
+  font-family: Urbanist;
+  font-weight: 300;
+  font-style: light;
+  font-display: swap;
+  src: url("/fonts/Urbanist-Light.woff2") format("woff2");
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+@font-face {
+  font-family: FiraCode;
+  font-weight: 45 920;
+  font-style: normal;
+  font-display: swap;
+  src: url("/fonts/FiraCode-VariableFont_wght.woff2") format("woff2");
+}
+
+@theme {
+  --breakpoint-sm: 37.5rem; /* min-width: 456px */
+  --breakpoint-md: 56.25rem; /* min-width: 900px */
+  --breakpoint-lg: 86.25rem; /* min-width: 1380px */
+
+  --color-bg00: #fafafa;
+  --color-bg01: #f4f4f5;
+  --color-bg02: #e4e4e7;
+  --color-bg03: #d3d3d3;
+  --color-text01: #000000;
+  --color-text02: #090919;
+  --color-text03: #323237;
+  --color-text04: #a2a2a2;
+  --color-blue01: #1864c6;
+  --color-blue02: #3549c6;
+  --color-blue03: #0972d3;
+  --color-blue04: #002a5f;
+  --color-positive: #037f0c;
+  --color-negative: #d91515;
+
+  --color-white: #ffffff;
+  --color-black: #000000;
+
+  --font-Urbanist: "Urbanist", "sans-serif";
+  --font-FiraCode: "FiraCode", "sans-serif";
+
+  --blur-2xs: 2px;
+}
+
+@layer utilities {
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --color-bg00: #0a0a0b;
+      --color-bg01: #090919;
+      --color-bg02: #323237;
+      --color-bg03: #a1a1aa;
+      --color-text01: #ffffff;
+      --color-text02: #f4f4f5;
+      --color-text03: #e4e4e7;
+      --color-text04: #a2a2a2;
+      --color-blue01: #3549c6;
+      --color-blue02: #1c3a9a;
+      --color-blue03: #30b3e0;
+      --color-blue04: #1864c6;
+      --color-positive: #29ad32;
+      --color-negative: #ee5252;
+    }
+  }
+
+  span,
+  p,
+  li,
+  input,
+  a {
+    font-size: 14px;
+  }
+
+  input:-webkit-autofill,
+  input:-webkit-autofill:hover,
+  input:-webkit-autofill:focus,
+  input:-webkit-autofill:active {
+    -webkit-text-fill-color: var(--color-text01);
+    -webkit-box-shadow: 0 0 0px 1000px transpaernt inset;
+    box-shadow: 0 0 0px 1000px transpaernt inset;
+    transition: background-color 5000s ease-in-out 0s;
+  }
+
+  input:autofill,
+  input:autofill:hover,
+  input:autofill:focus,
+  input:autofill:active {
+    -webkit-text-fill-color: var(--color-text01);
+    -webkit-box-shadow: 0 0 0px 1000px transpaernt inset;
+    box-shadow: 0 0 0px 1000px transpaernt inset;
+    transition: background-color 5000s ease-in-out 0s;
+  }
+
+  button,
+  a {
+    &:focus {
+      outline: none;
+    }
+  }
+
+  p {
+    white-space: pre-wrap;
+  }
+
+  h2 {
+    color: var(--color-text02);
+    font-size: 24px;
+    font-weight: 500;
+  }
+
+  h3 {
+    font-family: "Urbanist" !important;
+    color: var(--color-white);
+    font-size: 36px;
+    font-weight: 300;
+    line-height: 130%;
+  }
+
+  .page-container {
+    max-width: 1380px;
+    padding: 0 24px;
+  }
+
+  .landing-container {
+    width: 100%;
+    padding: 100px 24px;
+  }
+
+  .landing-content {
+    max-width: 1120px;
+    margin: 0 auto;
+  }
+
+  @media screen and (max-width: 900px) {
+    span,
+    p,
+    li,
+    input,
+    a {
+      font-size: 12px;
+    }
+  }
+
+  @media screen and (max-width: 600px) {
+    h3 {
+      font-size: 28px;
+      line-height: 130%;
+    }
+
+    .landing-container {
+      width: 100%;
+      padding: 56px 24px;
+    }
+  }
+
+  .a11y-hidden {
+    clip: rect(1px, 1px, 1px, 1px);
+    clip-path: inset(50%);
+    width: 1px;
+    height: 1px;
+    margin: -1px;
+    overflow: hidden;
+    padding: 0;
+    position: absolute;
+  }
+
+  .scrollbar-none {
+    scrollbar-width: none;
+    -ms-overflow-style: none; /* IE, Edge */
+    /* Webkit 기반 브라우저 */
+    &::-webkit-scrollbar {
+      display: none;
+    }
+  }
+
+  .scrollbar-thin {
+    &::-webkit-scrollbar {
+      /* display: none; */
+      width: 8px;
+    }
+
+    &::-webkit-scrollbar-thumb {
+      background-color: var(--color-bg02);
+      border-radius: 4px;
+    }
   }
 }
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+* {
+  font-family: "Pretendard";
+  box-sizing: border-box;
+}
+
+/* Markdown */
+article {
+  h2 {
+    font-size: 20px;
+    margin-top: 8px;
+  }
+
+  ul {
+    list-style-type: disc;
+    padding-left: 1.5em;
+  }
+
+  ol {
+    list-style-type: decimal;
+    padding-left: 1.5em;
+  }
+
+  a {
+    text-decoration: underline;
+  }
+
+  p + p {
+    margin-top: 1em;
+  }
+
+  table {
+    margin: 12px 0;
+  }
+
+  th, td {
+    border: 1px solid var(--color-bg03);
+    padding: 4px 8px;
+  }
+
+  th {
+    background-color: var(--color-bg02);
+    font-size: 15px;
+  }
+
+  td {
+    font-size: 12px;
+  }
 }

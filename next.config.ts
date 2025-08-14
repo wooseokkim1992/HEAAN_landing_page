@@ -14,8 +14,17 @@ const nextConfig: NextConfig = {
         source: '/api/callback',
         destination: `/api/v2/users/oidc/callback`,
       },
+      // {
+      //   source: '/auth/:path*',
+      //   destination: `${process.env.NEXT_PUBLIC_NGINX_URL}/interaction/:path*`,
+      // },
     ];
   },
+  // experimental: {
+  //   serverActions: {
+  //     allowedOrigins: ['wooseok.iheaan.io'],
+  //   },
+  // },
 };
 
 export default nextConfig;

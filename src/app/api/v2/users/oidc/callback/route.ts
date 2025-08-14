@@ -14,8 +14,8 @@ export async function GET(request: NextRequest) {
     newPathToAppend: '/v2/users/oidc',
     baseURL: process.env.CODER_API_URL,
   });
+  console.log(`${process.env.CODER_API_URL}/api/v2/users/oidc/callback`);
   if (endPointURL) {
-    console.log({ endPointURL: endPointURL?.toString() });
     const reqConfig: AxiosRequestConfig = {
       method: request.method,
       url: `${process.env.CODER_API_URL}/api/v2/users/oidc/callback`,
@@ -31,14 +31,17 @@ export async function GET(request: NextRequest) {
       `${process.env.CODER_API_URL}/api/v2/users/oidc/callback`,
       reqConfig,
     );
-
+    console.log({ resp });
     const subHeader = resp.request._header;
     if (Boolean(subHeader) && signInUrlRegEx.test(subHeader)) {
-      const redirectUrl = subHeader.split('HTTP/1.1')[0]?.split('GET')[1].trim();
-      console.log({ redirectUrl });
-      const uid = new URLSearchParams(redirectUrl).get('uid');
+      const redirectUrl = subHeader.split('HTTP/1.1')[0]?.split('GET')[1].trim() as string;
+      const tempURL = new URL(`http://localhost/${redirectUrl}`);
+      const tempSP = new URLSearchParams(tempURL.search);
+      const uid = tempSP.get('uid');
       redirect(`/sign-in?uid=${uid}`);
+      return;
+    } else {
+      redirect(request.url);
     }
-    redirect(request.url);
   }
 }
