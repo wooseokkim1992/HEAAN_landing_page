@@ -116,7 +116,7 @@ const eslintConfig = [
               group: 'internal',
             },
             {
-              pattern: '@constants/**/*',
+              pattern: '@{constants,amplify}/**/*',
               group: 'object',
             },
             {

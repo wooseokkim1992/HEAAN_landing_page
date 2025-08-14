@@ -28,6 +28,7 @@
         "src/typings/*"
       ],
       "@utils/*":["src/utils/*"],
+      "@amplify/*":["src/amplify/*"]
     }
   },
   "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts"],

@@ -1,13 +1,11 @@
-import { NextResponse } from "next/server";
-import type { NextFetchEvent, NextRequest } from "next/server";
-import { CustomMiddleware } from "@/middlewares/middlewareChain";
+import { NextResponse } from 'next/server';
+
+import { CustomMiddleware } from '@/middlewares/middlewareChain';
+
+import type { NextFetchEvent, NextRequest } from 'next/server';
 
 export const routeMiddleware = (middleware: CustomMiddleware) => {
-  return async (
-    request: NextRequest,
-    event: NextFetchEvent,
-    response: NextResponse,
-  ) => {
+  return async (request: NextRequest, event: NextFetchEvent, response: NextResponse) => {
     // const token = request.cookies.get("accessToken");
 
     const { pathname } = request.nextUrl;
@@ -34,5 +32,5 @@ export const routeMiddleware = (middleware: CustomMiddleware) => {
 };
 
 export const config = {
-  matcher: ["/", "/payments/billing", "/my/payments-dashboard"],
+  matcher: ['/', '/payments/billing', '/my/payments-dashboard'],
 };

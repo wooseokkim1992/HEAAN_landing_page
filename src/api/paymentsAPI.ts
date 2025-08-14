@@ -1,9 +1,6 @@
-import {
-  ConfirmOrderType,
-  PaymentsCancelType,
-  TempOrderType,
-} from "@/types/paymentsTypes";
-import { instance } from "./axios";
+import { ConfirmOrderType, PaymentsCancelType, TempOrderType } from '@/types/paymentsTypes';
+
+import { instance } from './axios';
 
 export const postTempOrder = async ({
   orderId,
@@ -73,11 +70,7 @@ export const postCancelOrder = async ({
     },
     {
       validateStatus: (status: number) =>
-        status === 200 ||
-        status === 400 ||
-        status === 403 ||
-        status === 404 ||
-        status === 504,
+        status === 200 || status === 400 || status === 403 || status === 404 || status === 504,
     },
   );
 
@@ -90,8 +83,7 @@ export const getOrderList = async ({ page }: PageType) => {
   const res = await instance.get(
     `${process.env.NEXT_PUBLIC_BE_DOMAIN}/payments/list/?page=${page}`,
     {
-      validateStatus: (status: number) =>
-        status === 200 || status === 403 || status === 404,
+      validateStatus: (status: number) => status === 200 || status === 403 || status === 404,
     },
   );
 
@@ -100,12 +92,9 @@ export const getOrderList = async ({ page }: PageType) => {
 
 // TODO(BE): pagination
 export const getCancelList = async () => {
-  const res = await instance.get(
-    `${process.env.NEXT_PUBLIC_BE_DOMAIN}/payments/cancel/list/`,
-    {
-      validateStatus: (status: number) => status === 200 || status === 403,
-    },
-  );
+  const res = await instance.get(`${process.env.NEXT_PUBLIC_BE_DOMAIN}/payments/cancel/list/`, {
+    validateStatus: (status: number) => status === 200 || status === 403,
+  });
 
   return res;
 };
@@ -114,8 +103,7 @@ export const getCancelOrder = async (transactionKey: string) => {
   const res = await instance.get(
     `${process.env.NEXT_PUBLIC_BE_DOMAIN}/payments/cancel/${transactionKey}/`,
     {
-      validateStatus: (status: number) =>
-        status === 200 || status === 403 || status === 404,
+      validateStatus: (status: number) => status === 200 || status === 403 || status === 404,
     },
   );
 

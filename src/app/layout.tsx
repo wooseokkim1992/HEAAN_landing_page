@@ -1,65 +1,64 @@
-import type { Metadata } from "next";
-import Image from "next/image";
-import AmplifyConfiguration from "@/amplify/AmplifyConfiguration";
+import type { Metadata } from 'next';
 
-import "./globals.css";
-import QueryProvider from "@/state/tanstackQuery/QueryProvider";
-import Navigation from "@/components/Navigation";
-import Footer from "@/components/Footer";
-import AuthChecker from "@/components/AuthChecker";
+import Image from 'next/image';
+
+import AmplifyConfiguration from '@/amplify/AmplifyConfiguration';
+
+import './globals.css';
+import AuthChecker from '@/components/AuthChecker';
+import Footer from '@/components/Footer';
+import Navigation from '@/components/Navigation';
+import QueryProvider from '@/state/tanstackQuery/QueryProvider';
 
 export const metadata: Metadata = {
-  metadataBase: new URL("https://heaan.io"),
-  title: "CODE.HEAAN",
-  description:
-    "Building and executing HEaaN-powered applications even on GPU via the web.",
-  keywords: ["CODE.HEAAN", "HEaaN", "cloud-base development environment"],
+  metadataBase: new URL('https://heaan.io'),
+  title: 'CODE.HEAAN',
+  description: 'Building and executing HEaaN-powered applications even on GPU via the web.',
+  keywords: ['CODE.HEAAN', 'HEaaN', 'cloud-base development environment'],
   openGraph: {
-    title: "CODE.HEAAN",
-    description:
-      "Building and executing HEaaN-powered applications even on GPU via the web.",
-    url: new URL("https://heaan.io"),
-    siteName: "CODE.HEAAN",
+    title: 'CODE.HEAAN',
+    description: 'Building and executing HEaaN-powered applications even on GPU via the web.',
+    url: new URL('https://heaan.io'),
+    siteName: 'CODE.HEAAN',
     images: [
       {
-        url: "/opengraph-image.png",
+        url: '/opengraph-image.png',
         width: 1200,
         height: 630,
-        alt: "CODE.HEAAN Symbol image",
+        alt: 'CODE.HEAAN Symbol image',
       },
     ],
-    type: "website",
+    type: 'website',
   },
   twitter: {
-    title: "CODE.HEAAN",
-    description:
-      "Building and executing HEaaN-powered applications even on GPU via the web.",
-    card: "summary_large_image",
-    images: "/twitter-image.png",
+    title: 'CODE.HEAAN',
+    description: 'Building and executing HEaaN-powered applications even on GPU via the web.',
+    card: 'summary_large_image',
+    images: '/twitter-image.png',
   },
   icons: {
     icon: [
       {
-        type: "image/png",
-        media: "(prefers-color-scheme: light)",
-        url: "/assets/HEaaN_light.png",
+        type: 'image/png',
+        media: '(prefers-color-scheme: light)',
+        url: '/assets/HEaaN_light.png',
       },
       {
-        type: "image/png",
-        media: "(prefers-color-scheme: dark)",
-        url: "/assets/HEaaN_dark.png",
+        type: 'image/png',
+        media: '(prefers-color-scheme: dark)',
+        url: '/assets/HEaaN_dark.png',
       },
     ],
     apple: [
       {
-        type: "image/png",
-        media: "(prefers-color-scheme: light)",
-        url: "/assets/HEaaN_light.png",
+        type: 'image/png',
+        media: '(prefers-color-scheme: light)',
+        url: '/assets/HEaaN_light.png',
       },
       {
-        type: "image/png",
-        media: "(prefers-color-scheme: dark)",
-        url: "/assets/HEaaN_dark.png",
+        type: 'image/png',
+        media: '(prefers-color-scheme: dark)',
+        url: '/assets/HEaaN_dark.png',
       },
     ],
   },
@@ -72,7 +71,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body suppressHydrationWarning={true} className={`bg-bg00 antialiased`}>
+      <body suppressHydrationWarning className={`bg-bg00 antialiased`}>
         <AmplifyConfiguration>
           <QueryProvider>
             <AuthChecker />
@@ -94,9 +93,7 @@ export default function RootLayout({
                 fill
                 priority
               />
-              <section className="h-full min-h-screen w-full pt-[60px]">
-                {children}
-              </section>
+              <section className="h-full min-h-screen w-full pt-[60px]">{children}</section>
             </main>
             <Footer />
           </QueryProvider>

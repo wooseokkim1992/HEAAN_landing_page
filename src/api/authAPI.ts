@@ -4,10 +4,10 @@ import {
   resendSignUpCode,
   resetPassword,
   signUp,
-} from "aws-amplify/auth";
+} from 'aws-amplify/auth';
 
-import { clearSessionStorage } from "@/utilities/sessionStorage";
-import { ALERT_MSG, PATH_LIST, SUCCESSED } from "@/constants/commonConstants";
+import { ALERT_MSG, PATH_LIST, SUCCESSED } from '@/constants/commonConstants';
+import { clearSessionStorage } from '@/utilities/sessionStorage';
 
 type EmailType = { email: string };
 type CodeType = { code: string };
@@ -17,12 +17,7 @@ type SignUpType = EmailType & PasswordType & UserInfoType;
 type ConfirmAccountType = EmailType & CodeType;
 type ResetPasswordType = ConfirmAccountType & PasswordType;
 
-export const handleSignUp = async ({
-  email,
-  password,
-  name,
-  occupation,
-}: SignUpType) => {
+export const handleSignUp = async ({ email, password, name, occupation }: SignUpType) => {
   try {
     const { nextStep } = await signUp({
       username: email,
@@ -31,12 +26,12 @@ export const handleSignUp = async ({
         userAttributes: {
           email,
           name,
-          "custom:occupation": occupation,
+          'custom:occupation': occupation,
         },
       },
     });
 
-    if (nextStep.signUpStep === "CONFIRM_SIGN_UP") {
+    if (nextStep.signUpStep === 'CONFIRM_SIGN_UP') {
       return SUCCESSED;
     }
   } catch (err) {
@@ -55,21 +50,18 @@ export const handleResendCode = async ({ email }: EmailType) => {
   }
 };
 
-export const handleConfirmAccount = async ({
-  email,
-  code,
-}: ConfirmAccountType) => {
+export const handleConfirmAccount = async ({ email, code }: ConfirmAccountType) => {
   try {
     const { isSignUpComplete, nextStep } = await confirmSignUp({
       username: email,
       confirmationCode: code,
     });
 
-    if (isSignUpComplete && nextStep.signUpStep === "DONE") {
+    if (isSignUpComplete && nextStep.signUpStep === 'DONE') {
       clearSessionStorage();
       // FIXME: This window.alert will be removed.
       window.alert(
-        "Please try signing in again after your approval has been completed. We will notify you by email once your account has been approved.",
+        'Please try signing in again after your approval has been completed. We will notify you by email once your account has been approved.',
       );
       return SUCCESSED;
     }
@@ -89,11 +81,7 @@ export const handleSendCode = async ({ email }: EmailType) => {
   }
 };
 
-export const handleResetPassword = async ({
-  email,
-  code,
-  password,
-}: ResetPasswordType) => {
+export const handleResetPassword = async ({ email, code, password }: ResetPasswordType) => {
   try {
     await confirmResetPassword({
       username: email,
