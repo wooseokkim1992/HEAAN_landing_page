@@ -3,11 +3,12 @@ import type { Metadata } from 'next';
 import Image from 'next/image';
 
 import './globals.css';
-import AuthChecker from '@/components/AuthChecker';
-import Footer from '@/components/Footer';
-import Navigation from '@/components/Navigation';
 import QueryProvider from '@/state/tanstackQuery/QueryProvider';
 import AmplifyConfiguration from '@amplify/AmplifyConfiguration';
+import AuthChecker from '@components/AuthChecker';
+import Footer from '@components/Footer';
+import MSWProvider from '@components/MSWProvider';
+import Navigation from '@components/Navigation';
 
 export const metadata: Metadata = {
   metadataBase: new URL('https://heaan.io'),
@@ -71,32 +72,34 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body suppressHydrationWarning className={`bg-bg00 antialiased`}>
-        <AmplifyConfiguration>
-          <QueryProvider>
-            <AuthChecker />
-            <Navigation />
-            <main className="relative h-fit min-h-screen">
-              <Image
-                src="/assets/codeheaan_bg_light.png"
-                alt="codeheaan-background"
-                className="-z-1 mt-[60px] block object-cover dark:hidden"
-                sizes="(max-width: 1280px) 85vw, 70vw"
-                fill
-                priority
-              />
-              <Image
-                src="/assets/codeheaan_bg_dark.png"
-                alt="codeheaan-background"
-                className="-z-1 mt-[60px] hidden object-cover dark:block"
-                sizes="(max-width: 1280px) 85vw, 70vw"
-                fill
-                priority
-              />
-              <section className="h-full min-h-screen w-full pt-[60px]">{children}</section>
-            </main>
-            <Footer />
-          </QueryProvider>
-        </AmplifyConfiguration>
+        <MSWProvider>
+          <AmplifyConfiguration>
+            <QueryProvider>
+              <AuthChecker />
+              <Navigation />
+              <main className="relative h-fit min-h-screen">
+                <Image
+                  src="/assets/codeheaan_bg_light.png"
+                  alt="codeheaan-background"
+                  className="-z-1 mt-[60px] block object-cover dark:hidden"
+                  sizes="(max-width: 1280px) 85vw, 70vw"
+                  fill
+                  priority
+                />
+                <Image
+                  src="/assets/codeheaan_bg_dark.png"
+                  alt="codeheaan-background"
+                  className="-z-1 mt-[60px] hidden object-cover dark:block"
+                  sizes="(max-width: 1280px) 85vw, 70vw"
+                  fill
+                  priority
+                />
+                <section className="h-full min-h-screen w-full pt-[60px]">{children}</section>
+              </main>
+              <Footer />
+            </QueryProvider>
+          </AmplifyConfiguration>
+        </MSWProvider>
       </body>
     </html>
   );
