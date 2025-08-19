@@ -1,51 +1,72 @@
 'use client';
 
+// import { signIn } from 'next-auth/react';
+import { AxiosResponse } from 'axios';
 import { useRouter, useSearchParams } from 'next/navigation';
 import { useState } from 'react';
 
 import Button from '@/components/elements/Button';
 import Input from '@/components/elements/Input';
+import { authInstance } from '@/constants/axiosInstances';
 import {
   BTN_TEXT,
   INPUT_LABELS,
   PATH_LIST,
   PLACEHOLDERS,
-  ALERT_MSG,
+  //ALERT_MSG,
 } from '@/constants/commonConstants';
 import { INPUT_STATUS_VAR } from '@/constants/styleConstants';
 import { InputStatusType } from '@/types/styleTypes';
 
 const SignIn = () => {
-  const [email, setEmail] = useState('');
+  const qs = useSearchParams();
+  const [email, setEmail] = useState(qs.get('email') ?? '');
   const [emailStatus, setEmailStatus] = useState<InputStatusType>(INPUT_STATUS_VAR.default);
   const [password, setPassword] = useState('');
   const [passwordStatus, setPasswordStatus] = useState<InputStatusType>(INPUT_STATUS_VAR.default);
-
   const router = useRouter();
-  const queryParams = useSearchParams();
-  const uid = queryParams.get('uid');
+  //const queryParams = useSearchParams();
+  //const uid = queryParams.get('uid');
 
-  if (uid === null) {
-    window.alert(ALERT_MSG.signIn.invalidAccess);
-    router.push(PATH_LIST.main);
-  }
+  // if (uid === null) {
+  //   window.alert(ALERT_MSG.signIn.invalidAccess);
+  //   router.push(PATH_LIST.main);
+  // }
 
   const isValid = !!email && !!password;
 
   // FIXME: This feature will be removed.
-  const errorText = queryParams.get('error');
+  // const errorText = queryParams.get('error');
 
-  if (errorText !== null) {
-    window.alert(errorText);
-    router.push(PATH_LIST.signIn);
-  }
+  // if (errorText !== null) {
+  //   window.alert(errorText);
+  //   router.push(PATH_LIST.signIn);
+  // }
 
   return (
     <div className="flex w-full flex-col items-center gap-12">
       <h2>Log In to Your Account</h2>
       <form
         className="flex w-full flex-col gap-4"
-        action={`${process.env.NEXT_PUBLIC_OIDC_DOMAIN}/interaction/${uid}/login`}
+        onSubmit={async (evt) => {
+          evt.preventDefault();
+          try {
+            const resp = await authInstance.post<
+              { message: string },
+              AxiosResponse<{ message: string }>,
+              { email: string; password: string }
+            >('/login', {
+              email,
+              password,
+            });
+            console.log({ resp });
+            router.push(`/`);
+          } catch (err) {
+            console.log(err);
+            window.alert('로그인 오류');
+          }
+        }}
+        //action={`${process.env.NEXT_PUBLIC_OIDC_DOMAIN}/interaction/${uid}/login`}
         method="POST"
       >
         <Input

@@ -1,18 +1,14 @@
 'use client';
 
+import { AxiosError, AxiosResponse } from 'axios';
 import { useRouter, useSearchParams } from 'next/navigation';
 import { useState } from 'react';
 
-import { handleConfirmAccount, handleResendCode } from '@/api/authAPI';
+import { handleResendCode } from '@/api/authAPI';
 import Button from '@/components/elements/Button';
 import Input from '@/components/elements/Input';
-import {
-  BTN_TEXT,
-  INPUT_LABELS,
-  PATH_LIST,
-  PLACEHOLDERS,
-  SUCCESSED,
-} from '@/constants/commonConstants';
+import { authInstance } from '@/constants/axiosInstances';
+import { BTN_TEXT, INPUT_LABELS, PATH_LIST, PLACEHOLDERS } from '@/constants/commonConstants';
 import { INPUT_STATUS_VAR } from '@/constants/styleConstants';
 import { InputStatusType } from '@/types/styleTypes';
 
@@ -24,12 +20,32 @@ const ConfirmAccount = () => {
   const queryParams = useSearchParams();
   const email = queryParams.get('email') as string;
 
-  const handleClick = async () => {
-    const res = await handleConfirmAccount({
-      email,
-      code,
-    });
-    return res === SUCCESSED && router.push(PATH_LIST.main);
+  const handleClick = () => {
+    authInstance
+      .post<
+        { message: string },
+        AxiosResponse<{ message: string }>,
+        { email: string; confirmationCode: string }
+      >('/signup/confirm', {
+        email,
+        confirmationCode: code,
+      })
+      .then((resp) => {
+        console.log({ resp });
+        router.push(`/sign-in?${queryParams.toString()}`);
+      })
+      .catch((err) => {
+        console.error(err);
+        if (err instanceof AxiosError) {
+          window.alert(err.message);
+        }
+      });
+
+    // const res = await handleConfirmAccount({
+    //   email,
+    //   code,
+    // });
+    //return res === SUCCESSED && router.push(PATH_LIST.main);
   };
 
   return (

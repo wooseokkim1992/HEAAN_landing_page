@@ -2,7 +2,8 @@ import { NavType } from '@/types/commonTypes';
 
 export const PATH_LIST = {
   main: '/',
-  signIn: `${process.env.NEXT_PUBLIC_CODER_DOMAIN}/api/v2/users/oidc/callback`,
+  signIn: '/sign-in',
+  //signIn: `${process.env.NEXT_PUBLIC_CODER_DOMAIN}/api/v2/users/oidc/callback`,
   signOut: `${process.env.NEXT_PUBLIC_OIDC_DOMAIN}/session/end`,
   termsAndConditions: '/terms-and-conditions',
   signUp: '/sign-up',
