@@ -19,8 +19,8 @@ import {
   SUCCESSED,
 } from '@/constants/commonConstants';
 import { INPUT_STATUS_VAR } from '@/constants/styleConstants';
-import { InputStatusType } from '@/types/styleTypes';
-import { getSessionStorage } from '@/utilities/sessionStorage';
+import { InputStatusType } from '@/typings/styleTypes';
+import { getSessionStorage } from '@/utils/auth/sessionStorage';
 
 const SignUp = () => {
   const [email, setEmail] = useState('');

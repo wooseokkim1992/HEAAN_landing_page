@@ -7,7 +7,7 @@ import remarkGfm from 'remark-gfm';
 import Dropdown from '@/components/elements/Dropdown';
 import TermsUpdatedInfo from '@/components/elements/TermsUpdatedInfo';
 import { SOFTWARE_LICENSE_AGREEMENT } from '@/data/softwareLicenseAgreement';
-import { TermsType } from '@/types/commonTypes';
+import { TermsType } from '@/typings/commonTypes';
 
 const SoftwareLicense = () => {
   const [selectedVersion, setSelectedVersion] = useState<TermsType>(SOFTWARE_LICENSE_AGREEMENT[0]);

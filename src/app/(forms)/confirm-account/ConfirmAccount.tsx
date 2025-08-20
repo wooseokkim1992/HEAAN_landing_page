@@ -10,7 +10,7 @@ import Input from '@/components/elements/Input';
 import { authInstance } from '@/constants/axiosInstances';
 import { BTN_TEXT, INPUT_LABELS, PATH_LIST, PLACEHOLDERS } from '@/constants/commonConstants';
 import { INPUT_STATUS_VAR } from '@/constants/styleConstants';
-import { InputStatusType } from '@/types/styleTypes';
+import { InputStatusType } from '@/typings/styleTypes';
 
 const ConfirmAccount = () => {
   const [code, setCode] = useState('');

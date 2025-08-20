@@ -1,4 +1,4 @@
-import { LayoutProps } from '@/types/commonTypes';
+import { LayoutProps } from '@/typings/commonTypes';
 
 const MyLayout = ({ children }: LayoutProps) => {
   return (

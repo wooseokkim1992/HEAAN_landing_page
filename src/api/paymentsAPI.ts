@@ -1,4 +1,4 @@
-import { ConfirmOrderType, PaymentsCancelType, TempOrderType } from '@/types/paymentsTypes';
+import { ConfirmOrderType, PaymentsCancelType, TempOrderType } from '@/typings/paymentsTypes';
 
 import { instance } from './axios';
 

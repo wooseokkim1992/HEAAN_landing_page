@@ -1,4 +1,8 @@
-import { NavType } from '@/types/commonTypes';
+import { NavType } from '@/typings/commonTypes';
+
+export const QUERY_KEYS = {
+  USER: () => ['users'],
+};
 
 export const PATH_LIST = {
   main: '/',

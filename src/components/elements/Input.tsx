@@ -3,7 +3,7 @@ import React, { Dispatch, SetStateAction, useState } from 'react';
 import VisibilityIcon from '@/assets/visibility.svg';
 import VisibilityOffIcon from '@/assets/visibility_off.svg';
 import { INPUT_COLOR_VAR, INPUT_STATUS_VAR } from '@/constants/styleConstants';
-import { InputStatusType } from '@/types/styleTypes';
+import { InputStatusType } from '@/typings/styleTypes';
 
 interface InputProps {
   id: string;

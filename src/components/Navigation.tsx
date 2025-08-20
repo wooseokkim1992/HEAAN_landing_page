@@ -9,7 +9,7 @@ import LogoCodeHeaanLight from '@/assets/code_heaan_logo_light.png';
 import Button from '@/components/elements/Button';
 import { BTN_TEXT, NAV_LIST, PATH_LIST } from '@/constants/commonConstants';
 import { useAuthStore } from '@/state/store/authStore';
-import { NavType } from '@/types/commonTypes';
+import { NavType } from '@/typings/commonTypes';
 
 const Navigation = () => {
   const [navList, setNavList] = useState<NavType>(NAV_LIST);

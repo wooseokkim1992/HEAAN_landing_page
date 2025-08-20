@@ -1,3 +1,5 @@
+'use client';
+
 import Image from 'next/image';
 
 import CodeHeaanTitle from '@/assets/code_heaan_title.svg';

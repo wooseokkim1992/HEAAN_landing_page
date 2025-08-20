@@ -7,7 +7,7 @@ import remarkGfm from 'remark-gfm';
 import Dropdown from '@/components/elements/Dropdown';
 import TermsUpdatedInfo from '@/components/elements/TermsUpdatedInfo';
 import { PRIVACY_POLICY } from '@/data/privacyPolicy';
-import { TermsType } from '@/types/commonTypes';
+import { TermsType } from '@/typings/commonTypes';
 
 const PrivacyPolicy = () => {
   const [selectedVersion, setSelectedVersion] = useState<TermsType>(PRIVACY_POLICY[0]);

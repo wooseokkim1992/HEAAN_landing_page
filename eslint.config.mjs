@@ -128,7 +128,7 @@ const eslintConfig = [
               group: 'object',
             },
             {
-              pattern: '@typings/**/*',
+              pattern: '@{typings}/**/*',
               group: 'type',
             },
           ],

@@ -1,4 +1,4 @@
-import { TermsType } from '@/types/commonTypes';
+import { TermsType } from '@/typings/commonTypes';
 
 export const TERMS_OF_SERVICE: TermsType[] = [
   {

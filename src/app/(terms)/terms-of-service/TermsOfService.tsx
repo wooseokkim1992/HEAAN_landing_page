@@ -7,7 +7,7 @@ import remarkGfm from 'remark-gfm';
 import Dropdown from '@/components/elements/Dropdown';
 import TermsUpdatedInfo from '@/components/elements/TermsUpdatedInfo';
 import { TERMS_OF_SERVICE } from '@/data/termsOfService';
-import { TermsType } from '@/types/commonTypes';
+import { TermsType } from '@/typings/commonTypes';
 
 const TermsOfService = () => {
   const [selectedVersion, setSelectedVersion] = useState<TermsType>(TERMS_OF_SERVICE[0]);

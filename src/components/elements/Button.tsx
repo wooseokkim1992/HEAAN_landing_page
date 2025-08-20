@@ -2,8 +2,8 @@ import Link from 'next/link';
 
 import { PATH_LIST } from '@/constants/commonConstants';
 import { BTN_COLOR_VAR, BTN_SIZE_VAR } from '@/constants/styleConstants';
-import { PathUrlType } from '@/types/commonTypes';
-import { BTNColorType, BTNSizeType } from '@/types/styleTypes';
+import { PathUrlType } from '@/typings/commonTypes';
+import { BTNColorType, BTNSizeType } from '@/typings/styleTypes';
 
 interface ButtonProps {
   btnText: string;

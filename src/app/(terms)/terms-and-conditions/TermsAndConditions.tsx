@@ -10,7 +10,7 @@ import { BTN_TEXT, PATH_LIST, SESSION_STORAGE_VAL, TERMS_TEXT } from '@/constant
 import { PRIVACY_POLICY } from '@/data/privacyPolicy';
 import { SOFTWARE_LICENSE_AGREEMENT } from '@/data/softwareLicenseAgreement';
 import { TERMS_OF_SERVICE } from '@/data/termsOfService';
-import { setSessionStorage } from '@/utilities/sessionStorage';
+import { setSessionStorage } from '@/utils/auth/sessionStorage';
 
 const TermsAndConditions = () => {
   const [checked, setChecked] = useState({
