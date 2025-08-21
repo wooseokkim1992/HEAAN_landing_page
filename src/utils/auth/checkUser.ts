@@ -69,7 +69,6 @@ export const getUserValidation = async () => {
     );
     return data;
   } catch (err) {
-    deleteAllCookies(nameStrs);
     console.error({ err });
     throw err;
   }
