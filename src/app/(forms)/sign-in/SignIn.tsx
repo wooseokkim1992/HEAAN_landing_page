@@ -37,7 +37,7 @@ const SignIn = () => {
           if (logInAsync) {
             try {
               await logInAsync({ email, password });
-              router.push(`${process.env.NEXT_PUBLIC_CODER}`);
+              router.push(`/`);
             } catch (err) {
               console.error(err);
               window.alert('로그인 오류');

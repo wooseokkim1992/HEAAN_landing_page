@@ -31,12 +31,12 @@ const Button = ({
   return (
     <button
       type={btnType}
-      className={`flex flex-row items-center justify-center rounded px-2 ${BTN_SIZE_VAR[btnSize]} ${BTN_COLOR_VAR[btnColor]} cursor-pointer disabled:cursor-not-allowed`}
+      className={`flex w-fit flex-row items-center justify-center rounded px-2 ${BTN_SIZE_VAR[btnSize]} ${BTN_COLOR_VAR[btnColor]} cursor-pointer disabled:cursor-not-allowed`}
       onClick={loading || disabled ? () => {} : handleClick}
       disabled={loading || disabled}
     >
       {isLink && !disabled ? (
-        <Link className="flex h-full w-full items-center justify-center" href={targetLink}>
+        <Link className="flex h-full w-fit items-center justify-center text-wrap" href={targetLink}>
           {btnText}
         </Link>
       ) : (

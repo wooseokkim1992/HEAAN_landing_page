@@ -20,10 +20,11 @@ export const getUserValidation = async () => {
       {
         withCredentials: true,
         headers: {
-          Cookie: `coder_session_token=${coder_session_token}; h_sid=${h_sid};`,
+          Cookie: `coder_session_token=${coder_session_token?.value}; h_sid=${h_sid?.value};`,
         },
       },
     );
+    console.log({ data });
     return data;
   } catch (err) {
     console.error({ err });

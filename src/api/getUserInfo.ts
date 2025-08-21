@@ -7,10 +7,11 @@ import { getUserValidation } from '@/utils/auth/checkUserCli';
 
 export const useGetUserInfo = () => {
   return useQuery({
-    queryKey: [...[...QUERY_KEYS.USER()]],
+    queryKey: [...QUERY_KEYS.USER()],
     queryFn: getUserValidation,
     refetchOnMount: true,
     refetchOnReconnect: true,
     refetchOnWindowFocus: true,
+    retry: 0,
   });
 };

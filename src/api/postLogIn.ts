@@ -8,10 +8,11 @@ export const usePostLogin = () => {
   const queryClient = useQueryClient();
   return useMutation({
     mutationFn: (reqData: TLoginReqDTO) => login(reqData),
-    onSuccess() {
+    onSettled() {
       queryClient.invalidateQueries({ queryKey: [...QUERY_KEYS.USER()] });
     },
     onError(error) {
+      window.alert(error);
       console.error({ error });
     },
   });

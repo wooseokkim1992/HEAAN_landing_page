@@ -2,22 +2,24 @@
 
 import Image from 'next/image';
 import Link from 'next/link';
-import { useEffect, useState } from 'react';
+import { useRouter } from 'next/navigation';
+import { useEffect, useState, useContext } from 'react';
 
 import LogoCodeHeaanDark from '@/assets/code_heaan_logo_dark.png';
 import LogoCodeHeaanLight from '@/assets/code_heaan_logo_light.png';
 import Button from '@/components/elements/Button';
 import { BTN_TEXT, NAV_LIST, PATH_LIST } from '@/constants/commonConstants';
-import { useAuthStore } from '@/state/store/authStore';
+// import { useAuthStore } from '@/state/store/authStore';
 import { NavType } from '@/typings/commonTypes';
 
+import { AuthCTX } from './AuthProvider';
 const Navigation = () => {
   const [navList, setNavList] = useState<NavType>(NAV_LIST);
-
-  const { auth } = useAuthStore();
+  const { user, logOutAsync } = useContext(AuthCTX);
+  const router = useRouter();
 
   useEffect(() => {
-    if (auth.isAuth) {
+    if (user) {
       const userNav = {
         title: BTN_TEXT.myPage,
         url: PATH_LIST.myPage,
@@ -27,7 +29,7 @@ const Navigation = () => {
 
       setNavList((prev) => ({ ...prev, userNav }));
     }
-  }, [auth.isAuth]);
+  }, [user]);
 
   return (
     <nav className="bg-bg01 border-bg02 fixed z-[21] flex min-h-[60px] w-full items-center border-b">
@@ -65,11 +67,37 @@ const Navigation = () => {
           })}
           <div className="w-fit">
             <Button
+              btnText={BTN_TEXT.signOut}
+              btnSize="md"
+              btnColor="blue03Outline"
+              isLink={false}
+              targetLink={PATH_LIST.signIn}
+              handleClick={async () => {
+                try {
+                  if (logOutAsync) {
+                    await logOutAsync();
+                    router.push('/sign-in');
+                  }
+                } catch (err) {
+                  console.error(err);
+                  throw err;
+                }
+              }}
+            />
+          </div>
+          <div className="w-fit">
+            <Button
               btnText={BTN_TEXT.goToWorkspace}
               btnSize="md"
               btnColor="blue03Outline"
-              isLink
-              targetLink={PATH_LIST.signIn}
+              isLink={false}
+              handleClick={() => {
+                if (user) {
+                  router.push(`${process.env.NEXT_PUBLIC_CODER}`);
+                } else {
+                  router.push(`/sign-in`);
+                }
+              }}
             />
           </div>
         </div>
