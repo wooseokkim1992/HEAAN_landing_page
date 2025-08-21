@@ -9,7 +9,7 @@ export const usePostLogin = () => {
   return useMutation({
     mutationFn: (reqData: TLoginReqDTO) => login(reqData),
     onSettled() {
-      queryClient.invalidateQueries({ queryKey: [...QUERY_KEYS.USER()] });
+      queryClient.refetchQueries({ queryKey: [...QUERY_KEYS.USER()] });
     },
     onError(error) {
       window.alert(error);
