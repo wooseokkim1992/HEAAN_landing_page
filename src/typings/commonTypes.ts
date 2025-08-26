@@ -12,13 +12,29 @@ export type TermsType = {
 };
 
 export type MenuType = {
-  title: string;
+  title?: string;
   url: string;
   _blank: boolean;
+  restriction: 'AUTH' | 'NOT_AUTH' | 'NONE';
+  componentType: 'LINK' | 'BUTTON';
+  subMenu?: MenuType[];
 };
 
+type TopNavKeys = Exclude<
+  keyof typeof PATH_LIST,
+  | 'confirmAccount'
+  | 'resetPassword'
+  | 'privacyPolicy'
+  | 'termsOfService'
+  | 'softwareLicense'
+  | 'tossWidget'
+  | 'paypalWidget'
+  | 'internationalPaymentWidget'
+  | 'termsAndConditions'
+  | 'signUp'
+  | 'main'
+>;
+
 export type NavType = {
-  [key: string]: MenuType & {
-    subMenu: MenuType[];
-  };
+  [key in Partial<TopNavKeys>]: MenuType;
 };

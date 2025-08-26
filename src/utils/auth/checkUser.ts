@@ -1,4 +1,3 @@
-import axios, { AxiosResponse } from 'axios';
 import { type ReadonlyRequestCookies } from 'next/dist/server/web/spec-extension/adapters/request-cookies';
 import { cookies } from 'next/headers';
 
@@ -53,20 +52,28 @@ export const deleteAllCookies = async (keyStrs: string[]) => {
   });
 };
 
+export const getUserInfo = async (cookieStr: string): Promise<TResCheckUser> => {
+  const resp = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/auth/user/me`, {
+    method: 'GET',
+    headers: {
+      Cookie: cookieStr,
+    },
+    credentials: 'include',
+    cache: 'no-cache',
+  });
+  if (!resp.ok) {
+    throw Error('');
+  }
+  const data = (await resp.json()) as TResCheckUser;
+  return data;
+};
+
 export const getUserValidation = async () => {
   const nameStrs = ['coder_session_token', 'h_sid'];
   try {
     const cookieObj1 = await getRequiredCookies({ names: nameStrs });
     const cookieStr = cookieObj1 ? convertIntoCookieStr(cookieObj1) : '';
-    const { data } = await axios.get<TResCheckUser, AxiosResponse<TResCheckUser>>(
-      `${process.env.NEXT_PUBLIC_API_URL}/api/auth/user/me`,
-      {
-        withCredentials: true,
-        headers: {
-          Cookie: cookieStr,
-        },
-      },
-    );
+    const { data } = await getUserInfo(cookieStr);
     return data;
   } catch (err) {
     console.error({ err });

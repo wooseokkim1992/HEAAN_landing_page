@@ -1,0 +1,55 @@
+'use client';
+import { useRouter } from 'next/navigation';
+import { FC, useContext } from 'react';
+
+import { type BTNColorType, type BTNSizeType } from '@/typings/styleTypes';
+
+import { AuthCTX } from '../AuthProvider';
+
+import Button from './Button';
+
+interface ButtonProps {
+  btnText?: string;
+  btnSize: BTNSizeType;
+  btnColor: BTNColorType;
+  disabled?: boolean;
+  loading?: boolean;
+  btnType?: 'button' | 'submit' | 'reset' | undefined;
+}
+
+const SignOutButton: FC<ButtonProps> = ({
+  btnText = '',
+  btnSize,
+  btnColor,
+  disabled = false,
+  loading = false,
+  btnType = 'button',
+}) => {
+  const router = useRouter();
+  const { logOutAsync } = useContext(AuthCTX);
+  const handleClick = async () => {
+    try {
+      if (logOutAsync) {
+        await logOutAsync();
+        router.push('/');
+        //서버 컴포넌트 캐시 무효화 하고 새로고침
+        router.refresh();
+      }
+    } catch (err) {
+      window.alert(err);
+    }
+  };
+  return (
+    <Button
+      btnText={btnText}
+      btnSize={btnSize}
+      btnColor={btnColor}
+      isLink={false}
+      btnType={btnType}
+      disabled={loading || disabled}
+      handleClick={handleClick}
+    />
+  );
+};
+
+export default SignOutButton;

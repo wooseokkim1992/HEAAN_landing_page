@@ -14,6 +14,7 @@ const AuthHydration: FC<{ children: React.ReactNode }> = async ({ children }) =>
     });
     console.log({ resp });
   } catch (err) {
+    queryClient.setQueryData([...QUERY_KEYS.USER()], null);
     console.log({ err });
   }
   return <HydrationBoundary state={dehydrate(queryClient, {})}>{children}</HydrationBoundary>;

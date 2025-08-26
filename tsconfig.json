@@ -28,6 +28,7 @@
         "src/typings/*"
       ],
       "@utils/*":["src/utils/*"],
+      "@hooks/*":["src/hooks/*"],
       "@amplify/*":["src/amplify/*"]
     }
   },

@@ -120,7 +120,7 @@ const eslintConfig = [
               position: 'before',
             },
             {
-              pattern: '@{components,utils,assets}/**/*',
+              pattern: '@{components,utils,assets,utils}/**/*',
               group: 'internal',
             },
             {

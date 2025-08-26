@@ -38,6 +38,7 @@ const SignIn = () => {
             try {
               await logInAsync({ email, password });
               router.push(`/`);
+              router.refresh();
             } catch (err) {
               console.error(err);
               window.alert('로그인 오류');
