@@ -1,7 +1,9 @@
 import Image from 'next/image';
 import Link from 'next/link';
+import { getServerSession } from 'next-auth';
 
 import LogoCodeHeaanLight from '@/assets/code_heaan_logo_light.png';
+import { authOptions } from '@/utils/auth/nextAuth';
 import LogoCodeHeaanDark from '@assets/code_heaan_logo_dark.png';
 import Button from '@components/elements/Button';
 import { checkAuth, getLinkBtnFromNavList } from '@utils/auth/nav';
@@ -12,12 +14,10 @@ import { PATH_LIST } from '@constants/commonConstants';
 // import { useAuthStore } from '@/state/store/authStore';
 
 const Navigation = async () => {
-  console.log('in navigation');
-  const user = await checkAuth();
-  console.log({ user });
-  const { buttons, links } = getLinkBtnFromNavList(user);
-  console.log({ links });
-  console.log({ buttons });
+  // const user = await checkAuth();
+  const session = await getServerSession(authOptions);
+
+  const { buttons, links } = getLinkBtnFromNavList(session?.user);
   return (
     <nav className="bg-bg01 border-bg02 fixed z-[21] flex min-h-[60px] w-full items-center border-b">
       <div className="page-container mx-auto flex h-full w-full flex-col items-center justify-between gap-2 sm:flex-row">

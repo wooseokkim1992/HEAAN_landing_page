@@ -8,14 +8,13 @@ import { QUERY_KEYS } from '@constants/commonConstants';
 const AuthHydration: FC<{ children: React.ReactNode }> = async ({ children }) => {
   const queryClient = new QueryClient();
   try {
-    const resp = await queryClient.prefetchQuery({
+    await queryClient.prefetchQuery({
       queryKey: [...QUERY_KEYS.USER()],
       queryFn: getUserValidation,
     });
-    console.log({ resp });
-  } catch (err) {
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  } catch (_) {
     queryClient.setQueryData([...QUERY_KEYS.USER()], null);
-    console.log({ err });
   }
   return <HydrationBoundary state={dehydrate(queryClient, {})}>{children}</HydrationBoundary>;
 };

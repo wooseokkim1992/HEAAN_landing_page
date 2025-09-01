@@ -1,11 +1,12 @@
 'use client';
 
-import { useRouter, useSearchParams } from 'next/navigation';
-import { useState, useContext } from 'react';
+import { useSearchParams } from 'next/navigation';
+import { useState, useContext, useEffect } from 'react';
 
-import { AuthCTX } from '@/components/AuthProvider';
+// import { AuthCTX } from '@/components/AuthProvider';
 import Button from '@/components/elements/Button';
 import Input from '@/components/elements/Input';
+import { NextAuthCTX } from '@/components/NextAuthProvider';
 import {
   BTN_TEXT,
   INPUT_LABELS,
@@ -15,17 +16,23 @@ import {
 } from '@/constants/commonConstants';
 import { INPUT_STATUS_VAR } from '@/constants/styleConstants';
 import { InputStatusType } from '@/typings/styleTypes';
-
 const SignIn = () => {
   const qs = useSearchParams();
   const [email, setEmail] = useState(qs.get('email') ?? '');
   const [emailStatus, setEmailStatus] = useState<InputStatusType>(INPUT_STATUS_VAR.default);
   const [password, setPassword] = useState('');
   const [passwordStatus, setPasswordStatus] = useState<InputStatusType>(INPUT_STATUS_VAR.default);
-  const router = useRouter();
-  const { logInAsync } = useContext(AuthCTX);
+  // const router = useRouter();
+  // const { logInAsync } = useContext(AuthCTX);
+  const { signIn, status } = useContext(NextAuthCTX);
 
   const isValid = !!email && !!password;
+
+  useEffect(() => {
+    if (qs.get('error')) {
+      window.alert('로그인 오류 발생');
+    }
+  }, [qs]);
 
   return (
     <div className="flex w-full flex-col items-center gap-12">
@@ -34,11 +41,16 @@ const SignIn = () => {
         className="flex w-full flex-col gap-4"
         onSubmit={async (evt) => {
           evt.preventDefault();
-          if (logInAsync) {
+          if (signIn) {
             try {
-              await logInAsync({ email, password });
-              router.push(`/`);
-              router.refresh();
+              //await signIn({ email, password });
+              const result = await signIn({
+                email,
+                password,
+              });
+              // router.push(`/`);
+              // router.refresh();
+              console.log({ result });
             } catch (err) {
               console.error(err);
               window.alert('로그인 오류');
@@ -88,6 +100,7 @@ const SignIn = () => {
             btnColor="blue03Text"
             isLink
             targetLink={PATH_LIST.termsAndConditions}
+            loading={status === 'loading'}
           />
         </div>
         <div className="flex items-center gap-4">

@@ -4,7 +4,7 @@ import { FC, useContext } from 'react';
 
 import { type BTNColorType, type BTNSizeType } from '@/typings/styleTypes';
 
-import { AuthCTX } from '../AuthProvider';
+import { NextAuthCTX } from '../NextAuthProvider';
 
 import Button from './Button';
 
@@ -26,11 +26,12 @@ const SignOutButton: FC<ButtonProps> = ({
   btnType = 'button',
 }) => {
   const router = useRouter();
-  const { logOutAsync } = useContext(AuthCTX);
+  // const { logOutAsync } = useContext(AuthCTX);
+  const { signOut } = useContext(NextAuthCTX);
   const handleClick = async () => {
     try {
-      if (logOutAsync) {
-        await logOutAsync();
+      if (signOut) {
+        await signOut();
         router.push('/');
         //서버 컴포넌트 캐시 무효화 하고 새로고침
         router.refresh();

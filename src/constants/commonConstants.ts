@@ -1,5 +1,7 @@
 import { NavType } from '@/typings/commonTypes';
 
+export const COOKIES_NAMES_ARR = ['coder_session_token', 'h_sid'];
+
 export const QUERY_KEYS = {
   USER: () => ['users'],
 };

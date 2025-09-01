@@ -22,7 +22,10 @@ const nextConfig: NextConfig = {
   },
   async rewrites() {
     return [
-      { source: '/auth/:path*', destination: `${process.env.NEXT_PUBLIC_API_URL}/api/auth/:path*` },
+      {
+        source: '/auth_api/:path*',
+        destination: `${process.env.NEXT_PUBLIC_API_URL}/api/auth/:path*`,
+      },
     ];
   },
   experimental: {},

@@ -1,8 +1,9 @@
 import axios from 'axios';
 
 export const authInstance = axios.create({
-  baseURL: `/auth`,
+  baseURL: `/auth_api`,
   withCredentials: true,
+  timeout: 3000,
 });
 
 authInstance.interceptors.request.use(

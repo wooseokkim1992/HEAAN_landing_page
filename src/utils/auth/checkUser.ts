@@ -36,11 +36,10 @@ export const getRequiredCookies = async ({
 };
 
 export const convertIntoCookieStr = (obj: { [key: string]: string }) => {
-  return (
-    Object.entries(obj)
-      .map((elem) => `${elem[0]}=${elem[1]}`)
-      .join('; ') + ';'
-  );
+  return Object.entries(obj)
+    .map((elem) => `${elem[0]}=${elem[1]}`)
+    .join('; ')
+    .trim();
 };
 
 export const deleteAllCookies = async (keyStrs: string[]) => {
@@ -52,19 +51,21 @@ export const deleteAllCookies = async (keyStrs: string[]) => {
   });
 };
 
-export const getUserInfo = async (cookieStr: string): Promise<TResCheckUser> => {
+export const getUserInfo = async <TResDTO extends object>(cookieStr: string): Promise<TResDTO> => {
+  console.log({ cookieStr });
   const resp = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/auth/user/me`, {
     method: 'GET',
     headers: {
       Cookie: cookieStr,
     },
-    credentials: 'include',
-    cache: 'no-cache',
+    signal: AbortSignal.timeout(15000),
   });
   if (!resp.ok) {
-    throw Error('');
+    const errorResult = await resp.json();
+    throw errorResult;
   }
-  const data = (await resp.json()) as TResCheckUser;
+  const data = (await resp.json()) as TResDTO;
+  console.log({ data });
   return data;
 };
 
@@ -73,7 +74,7 @@ export const getUserValidation = async () => {
   try {
     const cookieObj1 = await getRequiredCookies({ names: nameStrs });
     const cookieStr = cookieObj1 ? convertIntoCookieStr(cookieObj1) : '';
-    const { data } = await getUserInfo(cookieStr);
+    const { data } = await getUserInfo<TResCheckUser>(cookieStr);
     return data;
   } catch (err) {
     console.error({ err });

@@ -5,7 +5,9 @@ import { type NavType, type MenuType } from '@/typings/commonTypes';
 import { getRequiredCookies, convertIntoCookieStr, getUserInfo } from './checkUser';
 type keyOfNavType = keyof NavType;
 
-export const filterOutTopNav = (user: TResCheckUser | undefined): [keyOfNavType, MenuType][] => {
+export const filterOutTopNav = (
+  user: TResCheckUser['data'] | undefined,
+): [keyOfNavType, MenuType][] => {
   return Object.entries(NAV_LIST).filter(
     (elem) =>
       elem[1].restriction === (Boolean(user) ? 'AUTH' : 'NOT_AUTH') ||
@@ -20,15 +22,15 @@ export const checkAuth = async () => {
       throw new Error('no proper cookies');
     } else if (cookieObj) {
       const cookieStr = convertIntoCookieStr(cookieObj);
-      return await getUserInfo(cookieStr);
+      return await getUserInfo<TResCheckUser>(cookieStr);
     }
-  } catch (err) {
-    console.error(err);
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  } catch (_) {
     return undefined;
   }
 };
 
-export const getLinkBtnFromNavList = (user: TResCheckUser | undefined) => {
+export const getLinkBtnFromNavList = (user: TResCheckUser['data'] | undefined) => {
   const navList = filterOutTopNav(user);
   return {
     links: navList.filter(([_, val]) => val.componentType === 'LINK'),

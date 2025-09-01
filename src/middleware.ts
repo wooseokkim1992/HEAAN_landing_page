@@ -17,17 +17,17 @@ const testPathNameRegEx = (pathname: string, regExArr: Iterable<RegExp>) => {
   return true;
 };
 
-const regExForAuth: RegExp[] = [/^\/payments/, /^\/my/, /^\/workspace/, /^\/widget/];
-const regExForUnAuth: RegExp[] = [
-  /^\/sign-in(?:\?.*)?$/,
+const regExForAuth: RegExp[] = [
+  /^\/payments/,
+  /^\/my/,
+  /^\/workspace/,
+  /^\/widget/,
   /^\/reset-password(?:\?.*)?$/,
-  /^\/confirm-account(?:\?.*)?$/,
 ];
+const regExForUnAuth: RegExp[] = [/^\/sign-in(?:\?.*)?$/, /^\/confirm-account(?:\?.*)?$/];
 export function middleware(request: NextRequest) {
   const { pathname } = request.nextUrl;
   const isAuthorized = isHasCookieRequired(request);
-  console.log({ pathname });
-  console.log({ isAuthorized });
   const isAuthDisAllowedPath = testPathNameRegEx(pathname, regExForUnAuth);
   if (isAuthDisAllowedPath && isAuthorized) {
     return NextResponse.redirect(new URL('/', request.url));

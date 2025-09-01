@@ -47,6 +47,7 @@ const eslintConfig = [
       // 'no-unused-vars'는 TypeScript 섹션에서 @typescript-eslint 버전으로 대체합니다.
       '@typescript-eslint/explicit-module-boundary-types': 'off', // 모듈 경계 타입 명시 강제 해제 (개인의 선호에 따라)
       '@typescript-eslint/no-unused-vars': ['error', { argsIgnorePattern: '^_' }],
+      '@typescript-eslint/no-empty-object-type': 'off',
       'no-unused-vars': 'off',
     },
   },
@@ -128,7 +129,7 @@ const eslintConfig = [
               group: 'object',
             },
             {
-              pattern: '@{typings}/**/*',
+              pattern: '@{typings,types}/**/*',
               group: 'type',
             },
           ],
