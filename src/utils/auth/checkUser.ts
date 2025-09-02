@@ -81,3 +81,13 @@ export const getUserValidation = async () => {
     throw err;
   }
 };
+
+export const testPathNameRegEx = (pathname: string, regExArr: Iterable<RegExp>) => {
+  const iterator = regExArr[Symbol.iterator]();
+  while (true) {
+    const { value, done } = iterator.next();
+    if (done) return false;
+    else if (value.test(pathname)) break;
+  }
+  return true;
+};

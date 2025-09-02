@@ -5,8 +5,7 @@ import { type FC } from 'react';
 import { authOptions } from '@/utils/auth/nextAuth';
 
 const NextAuthHydrationBoundary: FC<{ children: React.ReactNode }> = async ({ children }) => {
-  const session = await getServerSession(authOptions);
-  console.log({ session });
+  await getServerSession(authOptions);
   return <>{children}</>;
 };
 

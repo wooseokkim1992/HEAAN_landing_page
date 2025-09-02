@@ -76,16 +76,11 @@ export default async function RootLayout({
   return (
     <html lang="en">
       <body suppressHydrationWarning className={`bg-bg00 antialiased`}>
-        {/* <MSWProvider> */}
-        {/* <AmplifyConfiguration> */}
         <QueryProvider>
-          {/* <AuthHydration> */}
           {process.env.NODE_ENV === 'development' && <ReactQueryDevtools initialIsOpen />}
-          {/* <AuthProvider> */}
           <NextAuthHydrationBoundary>
             <NextAuthProvider>
               <NextProvider>
-                {/* <AuthChecker /> */}
                 <Navigation />
                 <main className="relative h-fit min-h-screen">
                   <Image
@@ -110,11 +105,7 @@ export default async function RootLayout({
               </NextProvider>
             </NextAuthProvider>
           </NextAuthHydrationBoundary>
-          {/* </AuthProvider>
-          </AuthHydration> */}
         </QueryProvider>
-        {/* </AmplifyConfiguration> */}
-        {/* </MSWProvider> */}
       </body>
     </html>
   );

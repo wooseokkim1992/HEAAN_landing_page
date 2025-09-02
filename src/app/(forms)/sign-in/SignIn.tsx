@@ -25,7 +25,6 @@ const SignIn = () => {
   // const router = useRouter();
   // const { logInAsync } = useContext(AuthCTX);
   const { signIn, status } = useContext(NextAuthCTX);
-
   const isValid = !!email && !!password;
 
   useEffect(() => {
@@ -45,8 +44,10 @@ const SignIn = () => {
             try {
               //await signIn({ email, password });
               const result = await signIn({
-                email,
-                password,
+                loginData: {
+                  email,
+                  password,
+                },
               });
               // router.push(`/`);
               // router.refresh();
@@ -86,7 +87,8 @@ const SignIn = () => {
             btnText={BTN_TEXT.signIn}
             btnSize="lg"
             btnColor={isValid ? 'blue01Filled' : 'disabled'}
-            disabled={!isValid}
+            disabled={!isValid || status === 'loading'}
+            loading={status === 'loading'}
           />
         </div>
       </form>
@@ -100,7 +102,6 @@ const SignIn = () => {
             btnColor="blue03Text"
             isLink
             targetLink={PATH_LIST.termsAndConditions}
-            loading={status === 'loading'}
           />
         </div>
         <div className="flex items-center gap-4">

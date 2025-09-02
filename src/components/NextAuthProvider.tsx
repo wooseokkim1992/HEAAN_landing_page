@@ -17,27 +17,18 @@ export const NextAuthCTX = createContext<CTXType>({ user: null, status: 'unauthe
 
 const NextProvider: FC<{ children: React.ReactNode }> = ({ children }) => {
   const { data, status } = useSession();
-  console.log({ user: data });
-  console.log({ status });
-  console.log(process.env.NEXTAUTH_URL);
-  const signIn: CTXType['signIn'] = async (loginData: TLoginReqDTO) => {
-    try {
-      console.log({ loginData });
-      const result = await authSignIn('credentials', {
-        email: loginData.email,
-        password: loginData.password,
-        callbackUrl: `http://localhost:3000/`,
-        redirect: true,
-      });
-      console.log({ result });
-      if (!result?.ok && result?.status && result?.status >= 400 && result.error) {
-        throw result.error;
-      }
-      return result;
-    } catch (err) {
-      console.error(err);
-      throw err;
+  const signIn: CTXType['signIn'] = async ({ loginData }) => {
+    console.log({ loginData });
+    const result = await authSignIn('credentials', {
+      email: loginData.email,
+      password: loginData.password,
+      redirect: true,
+      callbackUrl: '/',
+    });
+    if (!result?.ok && result?.status && result?.status >= 400 && result.error) {
+      throw result.error;
     }
+    return result;
   };
   const signOut: CTXType['signOut'] = async () => {
     const result = await authSignOut({

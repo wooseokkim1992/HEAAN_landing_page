@@ -1,5 +1,14 @@
 import { NavType } from '@/typings/commonTypes';
 
+export const regExForUnAuth: RegExp[] = [/^\/sign-in(?:\?.*)?$/, /^\/confirm-account(?:\?.*)?$/];
+export const regExForAuth: RegExp[] = [
+  /^\/payments/,
+  /^\/my/,
+  /^\/workspace/,
+  /^\/widget/,
+  /^\/reset-password(?:\?.*)?$/,
+];
+
 export const COOKIES_NAMES_ARR = ['coder_session_token', 'h_sid'];
 
 export const QUERY_KEYS = {

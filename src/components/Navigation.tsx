@@ -6,7 +6,7 @@ import LogoCodeHeaanLight from '@/assets/code_heaan_logo_light.png';
 import { authOptions } from '@/utils/auth/nextAuth';
 import LogoCodeHeaanDark from '@assets/code_heaan_logo_dark.png';
 import Button from '@components/elements/Button';
-import { checkAuth, getLinkBtnFromNavList } from '@utils/auth/nav';
+import { getLinkBtnFromNavList } from '@utils/auth/nav';
 
 import SignOutButton from './elements/SignOutButton';
 
@@ -65,22 +65,6 @@ const Navigation = async () => {
               )}
             </div>
           ))}
-          {/* 
-          <div className="w-fit">
-            <Button
-              btnText={BTN_TEXT.goToWorkspace}
-              btnSize="md"
-              btnColor="blue03Outline"
-              isLink={false}
-              handleClick={() => {
-                if (user) {
-                  router.push(`${process.env.NEXT_PUBLIC_CODER}`);
-                } else {
-                  router.push(`/sign-in`);
-                }
-              }}
-            />
-          </div> */}
         </div>
       </div>
     </nav>

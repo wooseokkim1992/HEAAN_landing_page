@@ -25,7 +25,7 @@ export type TNormalRespDTO = {
 
 export type TAuthContext<TUser, TLoginReqDTO> = {
   user: TUser | null;
-  signIn?: (loginData: TLoginReqDTO) => Promise<SignInResponse | undefined>;
+  signIn?: ({ loginData }: { loginData: TLoginReqDTO }) => Promise<SignInResponse | undefined>;
   signOut?: () => Promise<void>;
   status: 'loading' | 'authenticated' | 'unauthenticated';
 };
