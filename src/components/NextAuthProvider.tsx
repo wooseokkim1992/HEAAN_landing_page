@@ -9,7 +9,7 @@ import {
 import { type Session } from 'node_modules/next-auth/core/types';
 import { createContext, type FC } from 'react';
 
-import { type TAuthContext, type TLoginReqDTO } from '@/typings/auth';
+import { type TAuthContext, type TLoginReqDTO } from '@typings/auth';
 
 type CTXType = TAuthContext<Session, TLoginReqDTO>;
 

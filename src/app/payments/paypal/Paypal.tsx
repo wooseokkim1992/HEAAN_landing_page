@@ -3,11 +3,13 @@
 import { loadTossPayments, ANONYMOUS, TossPaymentsWidgets } from '@tosspayments/tosspayments-sdk';
 import { useEffect, useState } from 'react';
 
-import { postTempOrder } from '@/api/paymentsAPI';
-import Button from '@/components/elements/Button';
-import { BTN_TEXT, PATH_LIST } from '@/constants/commonConstants';
-import { useAuthStore } from '@/state/store/authStore';
-import { OrderField } from '@/typings/paymentsTypes';
+import { postTempOrder } from '@api/paymentsAPI';
+import Button from '@components/elements/Button';
+import { useAuthStore } from '@state/store/authStore';
+
+import { BTN_TEXT, PATH_LIST } from '@constants/commonConstants';
+
+import { OrderField } from '@typings/paymentsTypes';
 
 const Paypal = () => {
   const [orderInfo, setOrderInfo] = useState<OrderField>({

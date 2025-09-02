@@ -2,8 +2,9 @@
 
 import { useQuery } from '@tanstack/react-query';
 
-import { QUERY_KEYS } from '@/constants/commonConstants';
-import { getUserValidation } from '@/utils/auth/checkUserCli';
+import { getUserValidation } from '@utils/auth/checkUserCli';
+
+import { QUERY_KEYS } from '@constants/commonConstants';
 
 export const useGetUserInfo = () => {
   return useQuery({

@@ -1,8 +1,10 @@
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 
-import { QUERY_KEYS } from '@/constants/commonConstants';
-import { type TLoginReqDTO } from '@/typings/auth';
-import { login } from '@/utils/auth/loginUserCli';
+import { login } from '@utils/auth/loginUserCli';
+
+import { QUERY_KEYS } from '@constants/commonConstants';
+
+import { type TLoginReqDTO } from '@typings/auth';
 
 export const usePostLogin = () => {
   const queryClient = useQueryClient();

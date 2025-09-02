@@ -2,12 +2,14 @@ import { type User } from 'next-auth';
 import CredentialsProvider from 'next-auth/providers/credentials';
 import { CallbacksOptions, type AuthOptions } from 'node_modules/next-auth/core/types';
 
-import { COOKIES_NAMES_ARR } from '@/constants/commonConstants';
-import { type TResCheckUser } from '@/typings/auth';
 import { convertIntoCookieStr, getUserInfo } from '@utils/auth/checkUser';
 import { logIn, parseCookieInNextAuth } from '@utils/auth/loginUser';
+import { signOutInServer } from '@utils/auth/logoutUser';
 
-import { signOutInServer } from './logoutUser';
+import { COOKIES_NAMES_ARR } from '@constants/commonConstants';
+
+import { type TResCheckUser } from '@typings/auth';
+
 export const credentialProvider = CredentialsProvider({
   name: 'credential',
   credentials: {
@@ -50,10 +52,12 @@ export const callbacks: CallbacksOptions = {
     return session;
   },
   jwt({ token, user, trigger }) {
+    console.log({ trigger });
     if (user && trigger === 'signIn') {
       token.user = user.data;
       token.info = user.info;
     } else if (trigger === 'update') {
+    } else {
     }
     return token;
   },

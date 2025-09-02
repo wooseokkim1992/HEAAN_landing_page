@@ -3,14 +3,15 @@
 import { useRouter } from 'next/navigation';
 import { useState } from 'react';
 
-import Button from '@/components/elements/Button';
-import Checkbox from '@/components/elements/Checkbox';
-import TextContainer from '@/components/elements/TextContainer';
-import { BTN_TEXT, PATH_LIST, SESSION_STORAGE_VAL, TERMS_TEXT } from '@/constants/commonConstants';
-import { PRIVACY_POLICY } from '@/data/privacyPolicy';
-import { SOFTWARE_LICENSE_AGREEMENT } from '@/data/softwareLicenseAgreement';
-import { TERMS_OF_SERVICE } from '@/data/termsOfService';
-import { setSessionStorage } from '@/utils/auth/sessionStorage';
+import Button from '@components/elements/Button';
+import Checkbox from '@components/elements/Checkbox';
+import TextContainer from '@components/elements/TextContainer';
+import { setSessionStorage } from '@utils/auth/sessionStorage';
+
+import { BTN_TEXT, PATH_LIST, SESSION_STORAGE_VAL, TERMS_TEXT } from '@constants/commonConstants';
+import { PRIVACY_POLICY } from '@constants/privacyPolicy';
+import { SOFTWARE_LICENSE_AGREEMENT } from '@constants/softwareLicenseAgreement';
+import { TERMS_OF_SERVICE } from '@constants/termsOfService';
 
 const TermsAndConditions = () => {
   const [checked, setChecked] = useState({

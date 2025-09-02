@@ -4,10 +4,12 @@ import { useState } from 'react';
 import Markdown from 'react-markdown';
 import remarkGfm from 'remark-gfm';
 
-import Dropdown from '@/components/elements/Dropdown';
-import TermsUpdatedInfo from '@/components/elements/TermsUpdatedInfo';
-import { PRIVACY_POLICY } from '@/data/privacyPolicy';
-import { TermsType } from '@/typings/commonTypes';
+import Dropdown from '@components/elements/Dropdown';
+import TermsUpdatedInfo from '@components/elements/TermsUpdatedInfo';
+
+import { PRIVACY_POLICY } from '@constants/privacyPolicy';
+
+import { TermsType } from '@typings/commonTypes';
 
 const PrivacyPolicy = () => {
   const [selectedVersion, setSelectedVersion] = useState<TermsType>(PRIVACY_POLICY[0]);

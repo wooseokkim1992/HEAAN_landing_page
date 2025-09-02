@@ -2,11 +2,11 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { getServerSession } from 'next-auth';
 
-import LogoCodeHeaanLight from '@/assets/code_heaan_logo_light.png';
-import { authOptions } from '@/utils/auth/nextAuth';
 import LogoCodeHeaanDark from '@assets/code_heaan_logo_dark.png';
+import LogoCodeHeaanLight from '@assets/code_heaan_logo_light.png';
 import Button from '@components/elements/Button';
 import { getLinkBtnFromNavList } from '@utils/auth/nav';
+import { authOptions } from '@utils/auth/nextAuth';
 
 import SignOutButton from './elements/SignOutButton';
 

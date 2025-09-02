@@ -1,7 +1,8 @@
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 
-import { QUERY_KEYS } from '@/constants/commonConstants';
-import { logout } from '@/utils/auth/logoutUserCli';
+import { logout } from '@utils/auth/logoutUserCli';
+
+import { QUERY_KEYS } from '@constants/commonConstants';
 
 export const useDeleteUser = () => {
   const queryClient = useQueryClient();

@@ -1,8 +1,10 @@
-import { NAV_LIST } from '@/constants/commonConstants';
-import { type TResCheckUser } from '@/typings/auth';
-import { type NavType, type MenuType } from '@/typings/commonTypes';
+import { getRequiredCookies, convertIntoCookieStr, getUserInfo } from '@utils/auth/checkUser';
 
-import { getRequiredCookies, convertIntoCookieStr, getUserInfo } from './checkUser';
+import { NAV_LIST } from '@constants/commonConstants';
+
+import { type TResCheckUser } from '@typings/auth';
+import { type NavType, type MenuType } from '@typings/commonTypes';
+
 type keyOfNavType = keyof NavType;
 
 export const filterOutTopNav = (

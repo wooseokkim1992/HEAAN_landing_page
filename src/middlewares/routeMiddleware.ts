@@ -1,6 +1,6 @@
 import { NextResponse } from 'next/server';
 
-import { CustomMiddleware } from '@/middlewares/middlewareChain';
+import { CustomMiddleware } from '@middlewares/middlewareChain';
 
 import type { NextFetchEvent, NextRequest } from 'next/server';
 

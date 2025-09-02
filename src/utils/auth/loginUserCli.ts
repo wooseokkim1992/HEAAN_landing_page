@@ -1,7 +1,8 @@
 import { type AxiosResponse } from 'axios';
 
-import { authInstance } from '@/constants/axiosInstances';
-import { type TLoginReqDTO, type TNormalRespDTO } from '@/typings/auth';
+import { authInstance } from '@constants/axiosInstances';
+
+import { type TLoginReqDTO, type TNormalRespDTO } from '@typings/auth';
 
 export const login = async ({ email, password }: TLoginReqDTO) => {
   try {

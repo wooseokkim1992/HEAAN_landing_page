@@ -3,10 +3,11 @@
 import { loadTossPayments, TossPaymentsPayment } from '@tosspayments/tosspayments-sdk';
 import { useEffect, useState } from 'react';
 
-import { postTempOrder } from '@/api/paymentsAPI';
-import Button from '@/components/elements/Button';
-import { useAuthStore } from '@/state/store/authStore';
-import { OrderField } from '@/typings/paymentsTypes';
+import { postTempOrder } from '@api/paymentsAPI';
+import Button from '@components/elements/Button';
+import { useAuthStore } from '@state/store/authStore';
+
+import { OrderField } from '@typings/paymentsTypes';
 
 const InternationalPayment = () => {
   const [orderInfo, setOrderInfo] = useState<OrderField>({

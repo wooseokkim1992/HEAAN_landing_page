@@ -2,11 +2,11 @@
 
 import Image from 'next/image';
 
-import CodeHeaanTitle from '@/assets/code_heaan_title.svg';
-import DoneOutline from '@/assets/done_outline.svg';
-import Globe from '@/assets/globe.svg';
-import Lock from '@/assets/lock.svg';
-import StartButton from '@/components/elements/StartButton';
+import CodeHeaanTitle from '@assets/code_heaan_title.svg';
+import DoneOutline from '@assets/done_outline.svg';
+import Globe from '@assets/globe.svg';
+import Lock from '@assets/lock.svg';
+import StartButton from '@components/elements/StartButton';
 
 const PAY_FOR_GPU_USAGE = [
   'Transparent per-minute GPU pricing',

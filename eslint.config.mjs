@@ -106,12 +106,7 @@ const eslintConfig = [
           ],
           pathGroups: [
             {
-              pattern: 'next*',
-              group: 'external',
-              position: 'before',
-            },
-            {
-              pattern: 'react*',
+              pattern: '{next,react}*',
               group: 'external',
               position: 'before',
             },
@@ -121,7 +116,7 @@ const eslintConfig = [
               position: 'before',
             },
             {
-              pattern: '@{components,utils,assets,utils}/**/*',
+              pattern: '@{components,utils,assets,middlewares,state,api}/**/*',
               group: 'internal',
             },
             {
@@ -131,6 +126,10 @@ const eslintConfig = [
             {
               pattern: '@{typings,types}/**/*',
               group: 'type',
+            },
+            {
+              pattern: '@app/**/*',
+              group: 'index',
             },
           ],
           'newlines-between': 'always',

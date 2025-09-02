@@ -2,8 +2,9 @@
 
 import Link from 'next/link';
 
-import { BTN_COLOR_VAR, BTN_SIZE_VAR } from '@/constants/styleConstants';
-import { BTNColorType, BTNSizeType } from '@/typings/styleTypes';
+import { BTN_COLOR_VAR, BTN_SIZE_VAR } from '@constants/styleConstants';
+
+import { BTNColorType, BTNSizeType } from '@typings/styleTypes';
 
 interface ButtonProps {
   btnText?: string;

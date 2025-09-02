@@ -2,12 +2,13 @@
 
 import { useEffect } from 'react';
 
-import { handleSignOut } from '@/api/authAPI';
-import { ALERT_MSG } from '@/constants/commonConstants';
-import { useGrantIdQuery } from '@/hooks/queries/useGrantIdQuery';
-import { useTokensQuery } from '@/hooks/queries/useTokensQuery';
-import { useUserInfoQuery } from '@/hooks/queries/useUserInfoQuery';
-import { useAuthStore } from '@/state/store/authStore';
+import { handleSignOut } from '@api/authAPI';
+import { useGrantIdQuery } from '@hooks/queries/useGrantIdQuery';
+import { useTokensQuery } from '@hooks/queries/useTokensQuery';
+import { useUserInfoQuery } from '@hooks/queries/useUserInfoQuery';
+import { useAuthStore } from '@state/store/authStore';
+
+import { ALERT_MSG } from '@constants/commonConstants';
 
 const AuthChecker = () => {
   const {

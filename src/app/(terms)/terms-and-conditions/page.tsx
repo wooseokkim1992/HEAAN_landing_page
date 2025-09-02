@@ -1,4 +1,4 @@
-import TermsAndConditions from '@/app/(terms)/terms-and-conditions/TermsAndConditions';
+import TermsAndConditions from './TermsAndConditions';
 
 const Page = () => {
   return <TermsAndConditions />;

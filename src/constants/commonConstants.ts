@@ -1,4 +1,4 @@
-import { NavType } from '@/typings/commonTypes';
+import { NavType } from '@typings/commonTypes';
 
 export const regExForUnAuth: RegExp[] = [/^\/sign-in(?:\?.*)?$/, /^\/confirm-account(?:\?.*)?$/];
 export const regExForAuth: RegExp[] = [

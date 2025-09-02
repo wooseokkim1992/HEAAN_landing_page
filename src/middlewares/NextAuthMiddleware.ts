@@ -3,11 +3,12 @@ import { NextURL } from 'next/dist/server/web/next-url';
 import { NextFetchEvent, NextRequest, NextResponse } from 'next/server';
 import { getToken } from 'next-auth/jwt';
 
-import { regExForAuth, regExForUnAuth } from '@/constants/commonConstants';
-import { MiddlewareError } from '@/typings/errors/middlewareError';
-import { testPathNameRegEx } from '@/utils/auth/checkUser';
+import { type CustomMiddleware } from '@middlewares/middlewareChain';
+import { testPathNameRegEx } from '@utils/auth/checkUser';
 
-import { type CustomMiddleware } from './middlewareChain';
+import { regExForAuth, regExForUnAuth } from '@constants/commonConstants';
+
+import { MiddlewareError } from '@typings/errors/middlewareError';
 
 const getJWT = ({ req, cookieTitle }: { req: NextRequest; cookieTitle: string }) => {
   return req.cookies.get(cookieTitle);
@@ -42,8 +43,6 @@ export const newNextAuthMiddleware = (nextMiddleware: CustomMiddleware) => {
     const isForwardingBeforeGetToken = testPathNameRegEx(pathname, regExForUnAuth);
     const isForwardingAfterGetToken = testPathNameRegEx(pathname, regExForAuth);
     const { flag: isTokenExist, jwt } = checkTokenExist({ req: reqOutside });
-    console.log({ isTokenExist });
-    console.log({ isForwardingAfterGetToken });
     const qs = new URLSearchParams({ error: 'Not Allowed Access!' });
     if (isTokenExist && jwt && isForwardingAfterGetToken) {
       return nextAuthMiddleware(reqOutside, event, resp, nextMiddleware);
@@ -82,18 +81,3 @@ const nextAuthMiddleware = async (
     return NextResponse.redirect(new URL(`/?${qs.toString()}`, url));
   }
 };
-// withAuth(
-//   function middleware(req) {
-//     console.log({ req });
-//     //user 권한별 상세 제어 부분
-//     return nextMiddleware(requestFromOutside, event, resp) as NextMiddlewareResult;
-//   },
-//   {
-//     callbacks: {
-//       authorized: ({ token }) => {
-//         //token 이 없으면 /sign-in 페이지로 이동.
-//         return !!token;
-//       },
-//     },
-//   },
-// );

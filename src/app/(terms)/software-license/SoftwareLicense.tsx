@@ -4,10 +4,12 @@ import { useState } from 'react';
 import Markdown from 'react-markdown';
 import remarkGfm from 'remark-gfm';
 
-import Dropdown from '@/components/elements/Dropdown';
-import TermsUpdatedInfo from '@/components/elements/TermsUpdatedInfo';
-import { SOFTWARE_LICENSE_AGREEMENT } from '@/data/softwareLicenseAgreement';
-import { TermsType } from '@/typings/commonTypes';
+import Dropdown from '@components/elements/Dropdown';
+import TermsUpdatedInfo from '@components/elements/TermsUpdatedInfo';
+
+import { SOFTWARE_LICENSE_AGREEMENT } from '@constants/softwareLicenseAgreement';
+
+import { TermsType } from '@typings/commonTypes';
 
 const SoftwareLicense = () => {
   const [selectedVersion, setSelectedVersion] = useState<TermsType>(SOFTWARE_LICENSE_AGREEMENT[0]);

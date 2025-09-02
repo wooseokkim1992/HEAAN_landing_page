@@ -1,5 +1,4 @@
 import { type TInfo } from '@typings/auth';
-
 export const logIn = async <TReqDTO extends object>({
   data,
 }: {

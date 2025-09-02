@@ -4,13 +4,15 @@ import { AxiosError, AxiosResponse } from 'axios';
 import { useRouter, useSearchParams } from 'next/navigation';
 import { useState } from 'react';
 
-import { handleResendCode } from '@/api/authAPI';
-import Button from '@/components/elements/Button';
-import Input from '@/components/elements/Input';
-import { authInstance } from '@/constants/axiosInstances';
-import { BTN_TEXT, INPUT_LABELS, PATH_LIST, PLACEHOLDERS } from '@/constants/commonConstants';
-import { INPUT_STATUS_VAR } from '@/constants/styleConstants';
-import { InputStatusType } from '@/typings/styleTypes';
+import { handleResendCode } from '@api/authAPI';
+import Button from '@components/elements/Button';
+import Input from '@components/elements/Input';
+
+import { authInstance } from '@constants/axiosInstances';
+import { BTN_TEXT, INPUT_LABELS, PATH_LIST, PLACEHOLDERS } from '@constants/commonConstants';
+import { INPUT_STATUS_VAR } from '@constants/styleConstants';
+
+import { InputStatusType } from '@typings/styleTypes';
 
 const ConfirmAccount = () => {
   const [code, setCode] = useState('');

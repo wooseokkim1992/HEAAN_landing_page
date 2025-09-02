@@ -4,18 +4,20 @@ import { useSearchParams } from 'next/navigation';
 import { useState, useContext, useEffect } from 'react';
 
 // import { AuthCTX } from '@/components/AuthProvider';
-import Button from '@/components/elements/Button';
-import Input from '@/components/elements/Input';
-import { NextAuthCTX } from '@/components/NextAuthProvider';
+import Button from '@components/elements/Button';
+import Input from '@components/elements/Input';
+import { NextAuthCTX } from '@components/NextAuthProvider';
+
 import {
   BTN_TEXT,
   INPUT_LABELS,
   PATH_LIST,
   PLACEHOLDERS,
   //ALERT_MSG,
-} from '@/constants/commonConstants';
-import { INPUT_STATUS_VAR } from '@/constants/styleConstants';
-import { InputStatusType } from '@/typings/styleTypes';
+} from '@constants/commonConstants';
+import { INPUT_STATUS_VAR } from '@constants/styleConstants';
+
+import { InputStatusType } from '@typings/styleTypes';
 const SignIn = () => {
   const qs = useSearchParams();
   const [email, setEmail] = useState(qs.get('email') ?? '');

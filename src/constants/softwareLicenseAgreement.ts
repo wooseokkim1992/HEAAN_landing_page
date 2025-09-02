@@ -1,4 +1,4 @@
-import { TermsType } from '@/typings/commonTypes';
+import { TermsType } from '@typings/commonTypes';
 
 export const SOFTWARE_LICENSE_AGREEMENT: TermsType[] = [
   {

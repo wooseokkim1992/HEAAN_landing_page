@@ -1,11 +1,11 @@
 'use client';
 import { FC, useContext } from 'react';
 
-import { type BTNColorType, type BTNSizeType } from '@/typings/styleTypes';
-
 import { NextAuthCTX } from '../NextAuthProvider';
 
 import Button from './Button';
+
+import { type BTNColorType, type BTNSizeType } from '@typings/styleTypes';
 
 interface ButtonProps {
   btnText?: string;

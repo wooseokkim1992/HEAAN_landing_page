@@ -4,10 +4,11 @@ import { type AxiosResponse } from 'axios';
 import { SessionProvider } from 'next-auth/react';
 import { createContext, useEffect } from 'react';
 
-import { useDeleteUser } from '@/api/deleteUserInfo';
-import { useGetUserInfo } from '@/api/getUserInfo';
-import { usePostLogin } from '@/api/postLogIn';
-import { type TResCheckUser, type TLoginReqDTO, type TNormalRespDTO } from '@/typings/auth';
+import { useDeleteUser } from '@api/deleteUserInfo';
+import { useGetUserInfo } from '@api/getUserInfo';
+import { usePostLogin } from '@api/postLogIn';
+
+import { type TResCheckUser, type TLoginReqDTO, type TNormalRespDTO } from '@typings/auth';
 export const AuthCTX = createContext<{
   user?: TResCheckUser | undefined;
   logIn?: UseMutateFunction<void, Error, TLoginReqDTO, unknown>;

@@ -4,10 +4,11 @@ import { AxiosError, AxiosResponse } from 'axios';
 import { useRouter } from 'next/navigation';
 import { useEffect, useState } from 'react';
 
-import { handleSignUp } from '@/api/authAPI';
-import Button from '@/components/elements/Button';
-import Input from '@/components/elements/Input';
-import { authInstance } from '@/constants/axiosInstances';
+import Button from '@components/elements/Button';
+import Input from '@components/elements/Input';
+import { getSessionStorage } from '@utils/auth/sessionStorage';
+
+import { authInstance } from '@constants/axiosInstances';
 import {
   BTN_TEXT,
   INPUT_LABELS,
@@ -16,11 +17,10 @@ import {
   REG_EXP,
   SESSION_STORAGE_VAL,
   SUB_TEXT,
-  SUCCESSED,
-} from '@/constants/commonConstants';
-import { INPUT_STATUS_VAR } from '@/constants/styleConstants';
-import { InputStatusType } from '@/typings/styleTypes';
-import { getSessionStorage } from '@/utils/auth/sessionStorage';
+} from '@constants/commonConstants';
+import { INPUT_STATUS_VAR } from '@constants/styleConstants';
+
+import { InputStatusType } from '@typings/styleTypes';
 
 const SignUp = () => {
   const [email, setEmail] = useState('');

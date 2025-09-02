@@ -3,16 +3,13 @@ import type { Metadata } from 'next';
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
 import './globals.css';
 import Image from 'next/image';
-// import { SessionProvider } from 'next-auth/react';
 
-import QueryProvider from '@/state/tanstackQuery/QueryProvider';
-// import AuthHydration from '@components/AuthHydration';
-// import AuthProvider from '@components/AuthProvider';
 import Footer from '@components/Footer';
 import Navigation from '@components/Navigation';
 import NextAuthHydrationBoundary from '@components/NextAuthHydrationBoundary';
 import NextProvider from '@components/NextAuthProvider';
 import NextAuthProvider from '@components/NextProvider';
+import QueryProvider from '@state/tanstackQuery/QueryProvider';
 
 export const metadata: Metadata = {
   metadataBase: new URL('https://heaan.io'),
