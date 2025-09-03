@@ -7,7 +7,7 @@ import {
   useSession,
 } from 'next-auth/react';
 import { type Session } from 'node_modules/next-auth/core/types';
-import { createContext, type FC } from 'react';
+import { createContext, useEffect, type FC } from 'react';
 
 import { type TAuthContext, type TLoginReqDTO } from '@typings/auth';
 
@@ -17,6 +17,13 @@ export const NextAuthCTX = createContext<CTXType>({ user: null, status: 'unauthe
 
 const NextProvider: FC<{ children: React.ReactNode }> = ({ children }) => {
   const { data, status } = useSession();
+  useEffect(() => {
+    (async (data) => {
+      if (data?.errorInfo) {
+        await authSignOut({ callbackUrl: '/', redirect: true });
+      }
+    })(data);
+  }, [data]);
   const signIn: CTXType['signIn'] = async ({ loginData }) => {
     console.log({ loginData });
     const result = await authSignIn('credentials', {

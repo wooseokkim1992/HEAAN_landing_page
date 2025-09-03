@@ -1,7 +1,9 @@
 import { type ReadonlyRequestCookies } from 'next/dist/server/web/spec-extension/adapters/request-cookies';
 import { cookies } from 'next/headers';
+import { type JWT } from 'next-auth/jwt';
 
 import { type TResCheckUser } from '@typings/auth';
+import { FetchError } from '@typings/errors/fetchError';
 export const getCookies = async () => {
   return await cookies();
 };
@@ -51,6 +53,20 @@ export const deleteAllCookies = async (keyStrs: string[]) => {
   });
 };
 
+export const checkSession = async ({ cookieStr }: { cookieStr: string }) => {
+  const resp = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/auth/user/me`, {
+    method: 'GET',
+    headers: {
+      Cookie: cookieStr,
+    },
+    signal: AbortSignal.timeout(5000),
+  });
+  if (!resp.ok) {
+    throw new FetchError({ response: resp, message: 'Authentication Error' });
+  }
+  return resp;
+};
+
 export const getUserInfo = async <TResDTO extends object>(cookieStr: string): Promise<TResDTO> => {
   console.log({ cookieStr });
   const resp = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/auth/user/me`, {
@@ -90,4 +106,9 @@ export const testPathNameRegEx = (pathname: string, regExArr: Iterable<RegExp>) 
     else if (value.test(pathname)) break;
   }
   return true;
+};
+
+export const extractTokenIntoString = ({ token }: { token: JWT }) => {
+  const { info } = token;
+  return convertIntoCookieStr(info);
 };

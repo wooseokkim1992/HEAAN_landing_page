@@ -2,13 +2,19 @@ import { type User } from 'next-auth';
 import CredentialsProvider from 'next-auth/providers/credentials';
 import { CallbacksOptions, type AuthOptions } from 'node_modules/next-auth/core/types';
 
-import { convertIntoCookieStr, getUserInfo } from '@utils/auth/checkUser';
+import {
+  checkSession,
+  convertIntoCookieStr,
+  extractTokenIntoString,
+  getUserInfo,
+} from '@utils/auth/checkUser';
 import { logIn, parseCookieInNextAuth } from '@utils/auth/loginUser';
 import { signOutInServer } from '@utils/auth/logoutUser';
 
 import { COOKIES_NAMES_ARR } from '@constants/commonConstants';
 
 import { type TResCheckUser } from '@typings/auth';
+import { FetchError } from '@typings/errors/fetchError';
 
 export const credentialProvider = CredentialsProvider({
   name: 'credential',
@@ -47,17 +53,35 @@ export const callbacks: CallbacksOptions = {
   },
   session({ session, token }) {
     if (token) {
-      session.user = token.user;
+      const { user, errorInfo } = token;
+      if (Boolean(errorInfo)) {
+        session.errorInfo = errorInfo;
+        session.user = undefined;
+      } else {
+        session.errorInfo = undefined;
+        session.user = user;
+      }
     }
     return session;
   },
-  jwt({ token, user, trigger }) {
-    console.log({ trigger });
+  async jwt({ token, user, trigger }) {
     if (user && trigger === 'signIn') {
-      token.user = user.data;
-      token.info = user.info;
+      token = { user: user.data, info: user.info };
     } else if (trigger === 'update') {
-    } else {
+    } else if (!Boolean(trigger) && Boolean(token)) {
+      try {
+        const cookieStr = extractTokenIntoString({ token });
+        const respHeader = await checkSession({ cookieStr });
+        const cookieObj = parseCookieInNextAuth({ respHeader, cookieName: COOKIES_NAMES_ARR });
+        console.log({ cookieObj });
+        const data = (await respHeader.json()) as TResCheckUser;
+        token.user = data.data;
+      } catch (err) {
+        if (err instanceof FetchError) {
+          token.errorInfo = err;
+        }
+        console.log(err);
+      }
     }
     return token;
   },
@@ -80,7 +104,7 @@ export const events: AuthOptions['events'] = {
 
 export const authOptions: AuthOptions = {
   jwt: {
-    maxAge: 60 * 60,
+    maxAge: 30 * 60 * 1000,
   },
   pages: {
     signIn: '/sign-in',
