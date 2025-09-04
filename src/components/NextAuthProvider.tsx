@@ -1,5 +1,6 @@
 'use client';
 
+import { useRouter } from 'next/navigation';
 import {
   // SessionProvider,
   signIn as authSignIn,
@@ -17,11 +18,21 @@ export const NextAuthCTX = createContext<CTXType>({ user: null, status: 'unauthe
 
 const NextProvider: FC<{ children: React.ReactNode }> = ({ children }) => {
   const { data, status } = useSession();
+  const router = useRouter();
   useEffect(() => {
     (async (data) => {
-      const errorMessage = '';
       if (data && data?.errorInfo) {
-        await authSignOut({ callbackUrl: `/sign-in?error=${errorMessage}`, redirect: true });
+        try {
+          await authSignOut({
+            callbackUrl: `/sign-in?error=${data.errorInfo.getMessage()}`,
+            redirect: true,
+          });
+        } catch (err) {
+          console.error({ err });
+          router.push(`/sign-in?error=세션오류로 인한 로그아웃`);
+        }
+      } else {
+        router.push(`/sign-in?error=세션종료로 인한 로그아웃`);
       }
     })(data);
     console.log({ data });
