@@ -19,23 +19,20 @@ const NextProvider: FC<{ children: React.ReactNode }> = ({ children }) => {
   const { data, status } = useSession();
   useEffect(() => {
     (async (data) => {
-      if (data?.errorInfo) {
-        await authSignOut({ callbackUrl: '/', redirect: true });
+      const errorMessage = '';
+      if (data && data?.errorInfo) {
+        await authSignOut({ callbackUrl: `/sign-in?error=${errorMessage}`, redirect: true });
       }
     })(data);
+    console.log({ data });
   }, [data]);
   const signIn: CTXType['signIn'] = async ({ loginData }) => {
-    console.log({ loginData });
-    const result = await authSignIn('credentials', {
+    await authSignIn('credentials', {
       email: loginData.email,
       password: loginData.password,
       redirect: true,
       callbackUrl: '/',
     });
-    if (!result?.ok && result?.status && result?.status >= 400 && result.error) {
-      throw result.error;
-    }
-    return result;
   };
   const signOut: CTXType['signOut'] = async () => {
     const result = await authSignOut({

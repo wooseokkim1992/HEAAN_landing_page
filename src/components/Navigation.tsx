@@ -16,7 +16,6 @@ import { PATH_LIST } from '@constants/commonConstants';
 const Navigation = async () => {
   // const user = await checkAuth();
   const session = await getServerSession(authOptions);
-
   const { buttons, links } = getLinkBtnFromNavList(session?.user);
   return (
     <nav className="bg-bg01 border-bg02 fixed z-[21] flex min-h-[60px] w-full items-center border-b">

@@ -48,7 +48,7 @@ export const newNextAuthMiddleware = (nextMiddleware: CustomMiddleware) => {
       return nextAuthMiddleware(reqOutside, event, resp, nextMiddleware);
     }
     if (!isTokenExist && isForwardingAfterGetToken) {
-      return NextResponse.redirect(new URL(`/login?${qs.toString()}`, url));
+      return NextResponse.redirect(new URL(`/sign-in?${qs.toString()}`, url));
     } else if (isTokenExist && isForwardingBeforeGetToken) {
       return NextResponse.redirect(new URL(`/?${qs.toString()}`, url));
     }
@@ -62,7 +62,7 @@ const nextAuthMiddleware = async (
   resp: NextResponse,
   nextMiddleware: CustomMiddleware,
 ) => {
-  const url = getURL({ req: requestFromOutside });
+  const url = getURL({ req: requestFromOutside }).basePath;
   try {
     if (process.env.NEXTAUTH_SECRET) {
       await validateJWT({
@@ -74,6 +74,7 @@ const nextAuthMiddleware = async (
       throw new MiddlewareError(new URLSearchParams({ errorMessage: '비밀키 미설정' }));
     }
   } catch (err) {
+    console.error(err);
     if (err instanceof MiddlewareError) {
       return NextResponse.redirect(new URL(`/?${err.getQSIntoString()}`, url));
     }

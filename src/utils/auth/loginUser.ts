@@ -1,4 +1,7 @@
-import { type TInfo } from '@typings/auth';
+import dayjs from 'dayjs';
+
+import { type TExpDate, type TInfo } from '@typings/auth';
+import { FetchError } from '@typings/errors/fetchError';
 export const logIn = async <TReqDTO extends object>({
   data,
 }: {
@@ -15,8 +18,7 @@ export const logIn = async <TReqDTO extends object>({
       signal: AbortSignal.timeout(10000),
     });
     if (!resp.ok) {
-      const err = await resp.json();
-      throw err;
+      throw new FetchError({ response: resp, message: 'sign in error' });
     }
     return resp;
   } catch (err) {
@@ -41,18 +43,37 @@ export const parseCookieInNextAuth = ({
 }: {
   respHeader: Response;
   cookieName: string[];
-}): TInfo => {
+}): { info: TInfo; expDateObj: { [key: string]: TExpDate } } => {
   const cookies = respHeader.headers.getSetCookie();
   const mapData = new Map<string, string>();
+  const expData = new Map<string, TExpDate>();
   cookies.forEach((cookieStr) => {
+    console.log({ cookieStr });
     const cookieElems = cookieStr.split(';');
     const [key, val] = cookieElems[0].split('=');
     if (customIncludes({ arr: cookieName, val: key }) && !mapData.has(key)) {
-      console.log({ val });
       mapData.set(key, val);
+      expData.set(key, parseCookieExpData({ cookies: cookieElems }));
     }
   });
-  return Object.fromEntries(mapData.entries());
+  return {
+    info: Object.fromEntries(mapData.entries()),
+    expDateObj: Object.fromEntries(expData.entries()),
+  };
+};
+
+export const parseCookieExpData = ({ cookies }: { cookies: string[] }): TExpDate => {
+  const maxAgeRegEx = new RegExp(/^Max-Age=/);
+  //const expireRegEx = new RegExp(/^Expires=/);
+  const cookieNewArr = cookies.slice(1).map((elem) => elem.trim());
+  const maxAgeStr = cookieNewArr.find((elem) => maxAgeRegEx.test(elem));
+  const maxAgeNum = maxAgeStr ? Number(maxAgeStr?.split('=')[1]) : 0;
+  console.log({ maxAgeNum });
+  const expireStr = dayjs(Date.now()).add(maxAgeNum, 'millisecond');
+  return {
+    maxAge: maxAgeStr ? Number(maxAgeStr?.split('=')[1]) : 0,
+    tokenExp: expireStr.toISOString(),
+  };
 };
 
 export const isCookieInfo = (data: object): data is TInfo => {

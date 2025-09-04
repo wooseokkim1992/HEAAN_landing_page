@@ -31,7 +31,7 @@ const SignIn = () => {
 
   useEffect(() => {
     if (qs.get('error')) {
-      window.alert('로그인 오류 발생');
+      window.alert(qs.get('error'));
     }
   }, [qs]);
 
