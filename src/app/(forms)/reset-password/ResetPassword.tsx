@@ -3,9 +3,10 @@
 import { useRouter } from 'next/navigation';
 import { useEffect, useState } from 'react';
 
-import { handleResetPassword, handleSendCode } from '@/api/authAPI';
-import Button from '@/components/elements/Button';
-import Input from '@/components/elements/Input';
+import { handleResetPassword, handleSendCode } from '@api/authAPI';
+import Button from '@components/elements/Button';
+import Input from '@components/elements/Input';
+
 import {
   BTN_TEXT,
   INPUT_LABELS,
@@ -14,9 +15,10 @@ import {
   REG_EXP,
   SUB_TEXT,
   SUCCESSED,
-} from '@/constants/commonConstants';
-import { INPUT_STATUS_VAR } from '@/constants/styleConstants';
-import { InputStatusType } from '@/types/styleTypes';
+} from '@constants/commonConstants';
+import { INPUT_STATUS_VAR } from '@constants/styleConstants';
+
+import { InputStatusType } from '@typings/styleTypes';
 
 const ResetPassword = () => {
   const [email, setEmail] = useState('');

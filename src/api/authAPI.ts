@@ -6,8 +6,9 @@ import {
   signUp,
 } from 'aws-amplify/auth';
 
-import { ALERT_MSG, PATH_LIST, SUCCESSED } from '@/constants/commonConstants';
-import { clearSessionStorage } from '@/utilities/sessionStorage';
+import { clearSessionStorage } from '@utils/auth/sessionStorage';
+
+import { ALERT_MSG, PATH_LIST, SUCCESSED } from '@constants/commonConstants';
 
 type EmailType = { email: string };
 type CodeType = { code: string };

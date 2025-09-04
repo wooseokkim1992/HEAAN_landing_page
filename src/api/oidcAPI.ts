@@ -1,4 +1,4 @@
-import { instance } from '@/api/axios';
+import { instance } from '@api/axios';
 
 export const getGrantId = async () => {
   const res = await instance.get(`${process.env.NEXT_PUBLIC_OIDC_DOMAIN}/api/user/grant-id`, {

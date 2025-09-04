@@ -1,6 +1,6 @@
 import { useQuery } from '@tanstack/react-query';
 
-import { getTokensByGrantId } from '@/api/oidcAPI';
+import { getTokensByGrantId } from '@api/oidcAPI';
 
 export const useTokensQuery = () => {
   return useQuery({

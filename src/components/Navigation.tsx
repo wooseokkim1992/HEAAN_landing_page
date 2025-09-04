@@ -1,34 +1,22 @@
-'use client';
-
 import Image from 'next/image';
 import Link from 'next/link';
-import { useEffect, useState } from 'react';
+import { getServerSession } from 'next-auth';
 
-import LogoCodeHeaanDark from '@/assets/code_heaan_logo_dark.png';
-import LogoCodeHeaanLight from '@/assets/code_heaan_logo_light.png';
-import Button from '@/components/elements/Button';
-import { BTN_TEXT, NAV_LIST, PATH_LIST } from '@/constants/commonConstants';
-import { useAuthStore } from '@/state/store/authStore';
-import { NavType } from '@/types/commonTypes';
+import LogoCodeHeaanDark from '@assets/code_heaan_logo_dark.png';
+import LogoCodeHeaanLight from '@assets/code_heaan_logo_light.png';
+import Button from '@components/elements/Button';
+import { getLinkBtnFromNavList } from '@utils/auth/nav';
+import { authOptions } from '@utils/auth/nextAuth';
 
-const Navigation = () => {
-  const [navList, setNavList] = useState<NavType>(NAV_LIST);
+import SignOutButton from './elements/SignOutButton';
 
-  const { auth } = useAuthStore();
+import { PATH_LIST } from '@constants/commonConstants';
+// import { useAuthStore } from '@/state/store/authStore';
 
-  useEffect(() => {
-    if (auth.isAuth) {
-      const userNav = {
-        title: BTN_TEXT.myPage,
-        url: PATH_LIST.myPage,
-        _blank: false,
-        subMenu: [],
-      };
-
-      setNavList((prev) => ({ ...prev, userNav }));
-    }
-  }, [auth.isAuth]);
-
+const Navigation = async () => {
+  // const user = await checkAuth();
+  const session = await getServerSession(authOptions);
+  const { buttons, links } = getLinkBtnFromNavList(session?.user);
   return (
     <nav className="bg-bg01 border-bg02 fixed z-[21] flex min-h-[60px] w-full items-center border-b">
       <div className="page-container mx-auto flex h-full w-full flex-col items-center justify-between gap-2 sm:flex-row">
@@ -51,27 +39,31 @@ const Navigation = () => {
           />
         </Link>
         <div className="flex items-center gap-4 self-end sm:self-auto md:gap-8">
-          {Object.values(navList).map((val, i) => {
-            return (
-              <Link
-                key={`${val.title}-${i}`}
-                className={`text-text02 text-sm md:text-base`}
-                href={val.url}
-                target={val._blank ? '_blank' : '_self'}
-              >
-                {val.title}
-              </Link>
-            );
-          })}
-          <div className="w-fit">
-            <Button
-              btnText={BTN_TEXT.goToWorkspace}
-              btnSize="md"
-              btnColor="blue03Outline"
-              isLink
-              targetLink={PATH_LIST.signIn}
-            />
-          </div>
+          {links.map(([key, val]) => (
+            <Link
+              key={`${val.title}-${key}`}
+              className={`text-text02 text-sm md:text-base`}
+              href={val.url}
+              target={val._blank ? '_blank' : '_self'}
+            >
+              {val.title}
+            </Link>
+          ))}
+          {buttons.map(([key, val]) => (
+            <div key={key} className="w-fit">
+              {val.title !== 'Sign Out' ? (
+                <Button
+                  btnText={val.title}
+                  btnSize="md"
+                  btnColor="blue03Outline"
+                  isLink
+                  targetLink={val.url}
+                />
+              ) : (
+                <SignOutButton btnText={val.title} btnSize="md" btnColor="blue03Outline" />
+              )}
+            </div>
+          ))}
         </div>
       </div>
     </nav>

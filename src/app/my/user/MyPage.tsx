@@ -3,18 +3,19 @@
 import { useRouter } from 'next/navigation';
 import { useEffect, useState } from 'react';
 
-import { handleSignOut } from '@/api/authAPI';
+import { handleSignOut } from '@api/authAPI';
 import {
   getCreditChargeList,
   getCreditDeductList,
   getCreditRefundList,
   getUserCreditInfo,
-} from '@/api/creditAPI';
-import { getCancelList, getCancelOrder, getOrderList, postCancelOrder } from '@/api/paymentsAPI';
-import Button from '@/components/elements/Button';
-import LoadingSpinner from '@/components/elements/LoadingSpinner';
-import { ALERT_MSG, BTN_TEXT, PATH_LIST } from '@/constants/commonConstants';
-import { useAuthStore } from '@/state/store/authStore';
+} from '@api/creditAPI';
+import { getCancelList, getCancelOrder, getOrderList, postCancelOrder } from '@api/paymentsAPI';
+import Button from '@components/elements/Button';
+import LoadingSpinner from '@components/elements/LoadingSpinner';
+import { useAuthStore } from '@state/store/authStore';
+
+import { ALERT_MSG, BTN_TEXT, PATH_LIST } from '@constants/commonConstants';
 
 // TODO:DELETE
 // const ORDER_SAMPLE = [

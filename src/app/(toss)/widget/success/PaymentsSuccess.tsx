@@ -2,8 +2,8 @@
 
 import { useSearchParams } from 'next/navigation';
 
-import { postConfirmOrder } from '@/api/paymentsAPI';
-import Button from '@/components/elements/Button';
+import { postConfirmOrder } from '@api/paymentsAPI';
+import Button from '@components/elements/Button';
 
 const PaymentsSuccess = () => {
   const searchParams = useSearchParams();

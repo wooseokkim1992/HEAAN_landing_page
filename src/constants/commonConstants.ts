@@ -1,8 +1,24 @@
-import { NavType } from '@/types/commonTypes';
+import { NavType } from '@typings/commonTypes';
+
+export const regExForUnAuth: RegExp[] = [/^\/sign-in(?:\?.*)?$/, /^\/confirm-account(?:\?.*)?$/];
+export const regExForAuth: RegExp[] = [
+  /^\/payments/,
+  /^\/my/,
+  /^\/workspace/,
+  /^\/widget/,
+  /^\/reset-password(?:\?.*)?$/,
+];
+
+export const COOKIES_NAMES_ARR = ['coder_session_token', 'h_sid'];
+
+export const QUERY_KEYS = {
+  USER: () => ['users'],
+};
 
 export const PATH_LIST = {
   main: '/',
-  signIn: `${process.env.NEXT_PUBLIC_CODER_DOMAIN}/api/v2/users/oidc/callback`,
+  signIn: '/sign-in',
+  //signIn: `${process.env.NEXT_PUBLIC_CODER_DOMAIN}/api/v2/users/oidc/callback`,
   signOut: `${process.env.NEXT_PUBLIC_OIDC_DOMAIN}/session/end`,
   termsAndConditions: '/terms-and-conditions',
   signUp: '/sign-up',
@@ -18,6 +34,7 @@ export const PATH_LIST = {
   internationalPaymentWidget: '/payments/international',
   theHeaanBook: 'https://docs.heaan.io',
   gpuGuide: 'https://guide.heaan.io',
+  goToWorkspace: '/workspace',
 } as const;
 
 export const BTN_TEXT = {
@@ -109,25 +126,55 @@ export const ALERT_MSG = {
 
 export const NAV_LIST: NavType = {
   pricing: {
-    title: BTN_TEXT.pricing,
-    url: PATH_LIST.pricing,
+    title: BTN_TEXT['pricing'],
+    url: PATH_LIST['pricing'],
     _blank: false,
-    subMenu: [],
+    restriction: 'AUTH',
+    componentType: 'LINK',
   },
-  gpuGuide: {
-    title: BTN_TEXT.gpuGuide,
-    url: PATH_LIST.gpuGuide,
-    _blank: true,
-    subMenu: [],
+  signIn: {
+    title: BTN_TEXT['signIn'],
+    url: PATH_LIST['signIn'],
+    _blank: false,
+    restriction: 'NOT_AUTH',
+    componentType: 'BUTTON',
+  },
+  signOut: {
+    title: BTN_TEXT['signOut'],
+    url: PATH_LIST['signOut'],
+    _blank: false,
+    restriction: 'AUTH',
+    componentType: 'BUTTON',
+  },
+  myPage: {
+    title: BTN_TEXT['myPage'],
+    url: PATH_LIST['myPage'],
+    _blank: false,
+    restriction: 'AUTH',
+    componentType: 'LINK',
   },
   theHeaanBook: {
-    title: BTN_TEXT.theHeaanBook,
-    url: PATH_LIST.theHeaanBook,
+    title: BTN_TEXT['theHeaanBook'],
+    url: PATH_LIST['theHeaanBook'],
     _blank: true,
-    subMenu: [],
+    restriction: 'NONE',
+    componentType: 'LINK',
+  },
+  gpuGuide: {
+    title: BTN_TEXT['gpuGuide'],
+    url: PATH_LIST['gpuGuide'],
+    _blank: true,
+    restriction: 'NONE',
+    componentType: 'LINK',
+  },
+  goToWorkspace: {
+    title: BTN_TEXT['goToWorkspace'],
+    url: PATH_LIST['goToWorkspace'],
+    _blank: false,
+    restriction: 'AUTH',
+    componentType: 'BUTTON',
   },
 };
-
 export const FOOTER_NAV_LIST = [
   {
     name: 'Privacy Policy',

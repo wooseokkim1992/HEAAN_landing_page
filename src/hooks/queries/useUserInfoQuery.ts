@@ -1,6 +1,6 @@
 import { useQuery } from '@tanstack/react-query';
 
-import { getUserInfo } from '@/api/oidcAPI';
+import { getUserInfo } from '@api/oidcAPI';
 
 export const useUserInfoQuery = () => {
   return useQuery({

@@ -1,11 +1,14 @@
 'use client';
 
+import { AxiosError, AxiosResponse } from 'axios';
 import { useRouter } from 'next/navigation';
 import { useEffect, useState } from 'react';
 
-import { handleSignUp } from '@/api/authAPI';
-import Button from '@/components/elements/Button';
-import Input from '@/components/elements/Input';
+import Button from '@components/elements/Button';
+import Input from '@components/elements/Input';
+import { getSessionStorage } from '@utils/auth/sessionStorage';
+
+import { authInstance } from '@constants/axiosInstances';
 import {
   BTN_TEXT,
   INPUT_LABELS,
@@ -14,11 +17,10 @@ import {
   REG_EXP,
   SESSION_STORAGE_VAL,
   SUB_TEXT,
-  SUCCESSED,
-} from '@/constants/commonConstants';
-import { INPUT_STATUS_VAR } from '@/constants/styleConstants';
-import { InputStatusType } from '@/types/styleTypes';
-import { getSessionStorage } from '@/utilities/sessionStorage';
+} from '@constants/commonConstants';
+import { INPUT_STATUS_VAR } from '@constants/styleConstants';
+
+import { InputStatusType } from '@typings/styleTypes';
 
 const SignUp = () => {
   const [email, setEmail] = useState('');
@@ -63,8 +65,29 @@ const SignUp = () => {
   }, [password, confirmPassword, confirmPasswordStatus]);
 
   const handleClick = async () => {
-    const res = await handleSignUp({ email, password, name, occupation });
-    return res === SUCCESSED && router.push(`${PATH_LIST.confirmAccount}?email=${email}`);
+    try {
+      const resp = await authInstance.post<
+        { message: string },
+        AxiosResponse<{ message: string }>,
+        { email: string; password: string; name: string; occupation: string }
+      >('/signup', {
+        email,
+        password,
+        name,
+        occupation,
+      });
+      console.log({ resp });
+      const newQs = new URLSearchParams({ email });
+      router.push(`/confirm-account?${newQs.toString()}`);
+    } catch (err) {
+      console.error(err);
+      if (err instanceof AxiosError) {
+        window.alert(err.message);
+      }
+    }
+
+    // const res = await handleSignUp({ email, password, name, occupation });
+    // return res === SUCCESSED && router.push(`${PATH_LIST.confirmAccount}?email=${email}`);
   };
 
   const isValid =

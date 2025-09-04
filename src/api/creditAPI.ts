@@ -1,4 +1,4 @@
-import { instance } from '@/api/axios';
+import { instance } from '@api/axios';
 
 export const getUserCreditInfo = async () => {
   const res = await instance.get(`${process.env.NEXT_PUBLIC_BE_DOMAIN}/credits/user/info/`, {

@@ -1,6 +1,6 @@
 import Link from 'next/link';
 
-import { BTN_TEXT, PATH_LIST } from '@/constants/commonConstants';
+import { BTN_TEXT, PATH_LIST } from '@constants/commonConstants';
 
 const StartButton = () => {
   return (

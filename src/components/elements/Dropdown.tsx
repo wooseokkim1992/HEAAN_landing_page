@@ -1,6 +1,6 @@
 import { useState } from 'react';
 
-import IconArrow from '@/assets/arrow.svg';
+import IconArrow from '@assets/arrow.svg';
 
 interface DropdownProps {
   placeholder: string;

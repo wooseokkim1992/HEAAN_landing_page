@@ -1,5 +1,6 @@
-import FormContainer from '@/components/layout/FormContainer';
-import { LayoutProps } from '@/types/commonTypes';
+import FormContainer from '@components/layout/FormContainer';
+
+import { LayoutProps } from '@typings/commonTypes';
 
 const FormLayout = ({ children }: LayoutProps) => {
   return (

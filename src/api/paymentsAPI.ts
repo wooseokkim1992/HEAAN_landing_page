@@ -1,6 +1,6 @@
-import { ConfirmOrderType, PaymentsCancelType, TempOrderType } from '@/types/paymentsTypes';
-
 import { instance } from './axios';
+
+import { ConfirmOrderType, PaymentsCancelType, TempOrderType } from '@typings/paymentsTypes';
 
 export const postTempOrder = async ({
   orderId,

@@ -20,6 +20,15 @@ const nextConfig: NextConfig = {
   eslint: {
     ignoreDuringBuilds: true,
   },
+  async rewrites() {
+    return [
+      {
+        source: '/auth_api/:path*',
+        destination: `${process.env.NEXT_PUBLIC_API_URL}/api/auth/:path*`,
+      },
+    ];
+  },
+  experimental: {},
 };
 
 export default nextConfig;

@@ -1,5 +1,5 @@
-import IconCheckboxEmpty from '@/assets/checkbox_empty.svg';
-import IconCheckboxFilled from '@/assets/checkbox_filled.svg';
+import IconCheckboxEmpty from '@assets/checkbox_empty.svg';
+import IconCheckboxFilled from '@assets/checkbox_filled.svg';
 
 interface CheckboxProps {
   checkboxText: string;
